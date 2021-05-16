@@ -1,87 +1,44 @@
 import React from 'react';
-import { useState } from 'react';
-const axios = require('axios');
 
 class Register extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {           
-            username: "",
-            cash: 0, 
-            email: "", 
-            role: "", 
-            password: "" 
-        }
-      }
-
-    // const [formState, setFormState] = useState(initialState);
-
-    submitHandler = event => {
-      event.preventDefault();
-      console.log(formState);
-      postData();
-    };
-  
-    postData = () => {
-      const json = JSON.stringify(formState);
-      axios.post(
-        'http://localhost:9000/api/v1/users/register', json, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-    };
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-  
-        <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={formState.name}
-          onChange={e => {
-            setFormState({ ...formState, name: e.target.value });
-          }}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={formState.email}
-          onChange={e => {
-            setFormState({ ...formState, email: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Password"
-          value={formState.password}
-          onChange={e => {
-            setFormState({ ...formState, password: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Role"
-          value={formState.role}
-          onChange={e => {
-            setFormState({ ...formState, role: e.target.value });
-          }}
-        />
-        <input
-          type="number"
-          placeholder="Cash"
-          value={formState.cash}
-          onChange={e => {
-            setFormState({ ...formState, cash: e.target.value });
-          }}
-        />
-        <button>Confirm</button>
-      </form>
-        </header>
-      </div>
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <img src="images/signup-image.jpg" alt=""></img>
+                    <a href="/Login" class="signup-image-link">I am already member.</a>
+                </div>
+            </div>
+        </div>
     )
   }
 }

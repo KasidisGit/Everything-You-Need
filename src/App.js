@@ -8,20 +8,20 @@ import Register from './components/Register';
 
 function App() {
   return (
-  <Router>
-    <div className="App">
-      <div className="outer">
-        <div className="inner">
-          <Switch>
-            <Route path='/' exact={true} component={Login} />
-            <Route path='/product' component={Product} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-          </Switch>
+    <Router>
+      <div className="App">
+        <div className="outer">
+          <div className="inner">
+            <Switch>
+              <Route path='/' exact={true} component={Login} />
+              <Route path='/product' component={Product} />
+              <Route path='/login' component={Login} />
+              <Route path='/register' component={Register} />
+            </Switch>
+          </div>
         </div>
       </div>
-    </div>
-  </Router>
+    </Router>
   );
 }
 
