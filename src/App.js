@@ -16,7 +16,6 @@ function App() {
 
   const submitHandler = event => {
     event.preventDefault();
-    console.log(formState);
     postData();
   };
 
@@ -25,7 +24,8 @@ function App() {
     axios.post(
       'http://localhost:9000/api/v1/users/register', json, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*'
         }
       });
   };
@@ -38,9 +38,9 @@ function App() {
       <input
         type="text"
         placeholder="Name"
-        value={formState.name}
+        value={formState.username}
         onChange={e => {
-          setFormState({ ...formState, name: e.target.value });
+          setFormState({ ...formState, username: e.target.value });
         }}
       />
       <input
@@ -52,7 +52,7 @@ function App() {
         }}
       />
       <input
-        type="text"
+        type="password"
         placeholder="Password"
         value={formState.password}
         onChange={e => {
@@ -75,7 +75,7 @@ function App() {
           setFormState({ ...formState, cash: e.target.value });
         }}
       />
-      <button>Confirm</button>
+      <button type="submit" >Confirm</button>
     </form>
       </header>
     </div>
