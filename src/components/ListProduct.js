@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const axios = require('axios');
 const accessTokenStorage = window.localStorage;
@@ -6,6 +7,10 @@ const accessTokenStorage = window.localStorage;
 export default function Product() {
 
   const [products, setProducts] = useState([]);
+
+  const submitHandler = (productId) => {
+    accessTokenStorage.setItem('productId', productId)
+  };
 
   useEffect( () => {
 
@@ -28,9 +33,21 @@ export default function Product() {
 
   return (
     <div className="ListProduct">
-        { products.map(element => {
-            return <pre>{JSON.stringify(element,0,2)}</pre>
+        { products.map((element, idx) => {
+
+            return <>
+
+            <pre>
+                {JSON.stringify(element,0,2)}
+            </pre>
+
+            <Link onClick={()=>submitHandler(element.id)} key={idx} to={{ pathname: "/buyproduct/"+element.id, state: element }}>
+                Buy
+            </Link>
+
+            </>
         }) }
+                    
     </div>
   )
 }

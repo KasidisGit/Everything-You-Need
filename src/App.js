@@ -1,6 +1,7 @@
 import Register from './components/Register';
 import AddProduct from './components/AddProduct';
 import ListProduct from './components/ListProduct';
+import BuyProduct from './components/BuyProduct'
 import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path='/listproduct'>
             <ListProduct />
+          </Route>
+          <Route path='/buyproduct/:productId'>
+            <BuyProduct />
           </Route>
           <Route path='/login'>
             <Login />
