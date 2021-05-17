@@ -1,5 +1,6 @@
 import loginImg from '../images/login-img.jpg';
 import React, { useState } from 'react';
+import { Redirect } from 'react-router'
 
 const axios = require('axios');
 const accessTokenStorage = window.localStorage;
@@ -12,37 +13,49 @@ const initialState = {
 export default function Login() {
 
   const [formState, setFormState] = useState(initialState);
+  const [submitted, setSubmitted] = useState(false);
 
   const submitHandler = event => {
     event.preventDefault();
-    postData();
+    login();
   };
 
-  const postData = async () => {
+  const login = async () => {
     const json = JSON.stringify(formState);
-    let res = await axios.post(
+    await axios.post(
       'http://localhost:9000/api/v1/users/login', json, {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin' : '*'
         }
-      });
-    accessTokenStorage.setItem('UserAccessToken',res.data.accessToken)
+      }).then(res => {
+        setSubmitted(true)
+        accessTokenStorage.setItem('UserAccessToken',res.data.accessToken)
+      }).catch((err)=>{
+        console.error(err)
+      })
   };
 
+  if (submitted) {
+    return <Redirect push to={{
+      pathname: '/listproduct',
+    }}
+    />
+  } 
+
   return (
-    <div class="container">
-      <div class="signin-content">
-          <div class="signin-image">
+    <div className="container">
+      <div className="signin-content">
+          <div className="signin-image">
               <img src={loginImg} alt=""/>
-              <a href="/register" class="signup-image-link"><u>Create an account</u></a>
+              <a href="/register" className="signup-image-link"><u>Create an account</u></a>
           </div>
-          <div class="signin-form">
-              <h2 class="title-head">Welcome</h2>
-              <div class="title-text">Please log in</div>
-              <form onSubmit={submitHandler} class="register-form">
-                  <div class="form-group">
-                      <label for="your-name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+          <div className="signin-form">
+              <h2 className="title-head">Welcome</h2>
+              <div className="title-text">Please log in</div>
+              <form onSubmit={submitHandler} className="register-form">
+                  <div className="form-group">
+                      <label htmlFor="your-name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                       <input
                         type="text"
                         placeholder="Username"
@@ -52,8 +65,8 @@ export default function Login() {
                         }}
                       />
                   </div>
-                  <div class="form-group">
-                      <label for="your-pass"><i class="zmdi zmdi-lock"></i></label>
+                  <div className="form-group">
+                      <label htmlFor="your-pass"><i className="zmdi zmdi-lock"></i></label>
                       <input
                         type="password"
                         placeholder="Password"
@@ -63,12 +76,12 @@ export default function Login() {
                         }}
                       />
                   </div>
-                  <div class="form-group">
-                      <input type="checkbox" class="agree-term" />
-                      <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                  <div className="form-group">
+                      <input type="checkbox" className="agree-term" />
+                      <label htmlFor="remember-me" className="label-agree-term"><span><span></span></span>Remember me</label>
                   </div>
-                  <div class="form-group form-button">
-                      <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                  <div className="form-group form-button">
+                      <input type="submit" name="signin" id="signin" className="form-submit" value="Log in"/>
                   </div>
               </form>
           </div>
