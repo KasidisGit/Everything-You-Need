@@ -47,15 +47,16 @@ export default function Login() {
     <div className="container">
       <div className="signin-content">
           <div className="signin-image">
-              <img src={loginImg} alt=""/>
-              <a href="/register" className="signup-image-link"><u>Create an account</u></a>
+              <img className="figure" src={loginImg} alt=""/>
+              <p className="signup-image-link">Don't have an account yet?</p>
+              <a href="/register" className="signup-image-link"><u>Register</u></a>
           </div>
           <div className="signin-form">
-              <h2 className="title-head">Welcome</h2>
+              <h2 className="title-head-log">Welcome</h2>
               <div className="title-text">Please log in</div>
               <form onSubmit={submitHandler} className="register-form">
                   <div className="form-group">
-                      <label htmlFor="your-name"><i className="zmdi zmdi-account material-icons-name"></i></label>
+                      <label for="your-name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                       <input
                         type="text"
                         placeholder="Username"
@@ -77,11 +78,11 @@ export default function Login() {
                       />
                   </div>
                   <div className="form-group">
-                      <input type="checkbox" className="agree-term" />
-                      <label htmlFor="remember-me" className="label-agree-term"><span><span></span></span>Remember me</label>
+                      <input type="checkbox" className="agree-term" id="remember-me" />
+                      <label for="remember-me" className="label-agree-term"><span><span></span></span>Remember me</label>
                   </div>
                   <div className="form-group form-button">
-                      <input type="submit" name="signin" id="signin" className="form-submit" value="Log in"/>
+                      <input type="submit" name="signin" id="signin" className="form-submit form-btn-color" value="Log in"/>
                   </div>
               </form>
           </div>
