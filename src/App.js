@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
-import Product from './components/Product';
+
 import Login from './components/Login';
 import Register from './components/Register';
+import AddProduct from './components/AddProduct';
+import ListProduct from './components/ListProduct';
 
 function App() {
 
@@ -14,16 +16,19 @@ function App() {
           <div className="inner">
             <Switch>
               <Route path='/' exact={true}>
-                <Login/>
+                <Login />
               </Route>
-              <Route path='/product'>
-                <Product/>
+              <Route path='/addproduct'>
+                <AddProduct />
+              </Route>
+              <Route path='/listproduct'>
+                <ListProduct />
               </Route>
               <Route path='/login'>
-                <Login/>
+                <Login />
               </Route>
               <Route path='/register'>
-                <Register/>
+                <Register />
               </Route>
             </Switch>
           </div>

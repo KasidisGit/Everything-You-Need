@@ -158,7 +158,14 @@ body {
 .signup-image {
   margin: 0 55px; }
 
-.form-title {
+.title-head-log {
+  margin-bottom: 25px; }
+
+.title-head-re {
+  margin-bottom: 33px; }
+
+.title-text {
+  font-size: 16px;
   margin-bottom: 33px; }
 
 .signup-image {
@@ -340,6 +347,7 @@ label.valid {
   font-size: 18px; }
 
 .signin-content {
+  margin-top: 100px;
   padding-top: 67px;
   padding-bottom: 87px; }
 
@@ -412,6 +420,5 @@ label.valid {
     margin-left: 0px;
     padding: 0 30px; }
 
-  .form-title {
-    text-align: center; } }
+}
 

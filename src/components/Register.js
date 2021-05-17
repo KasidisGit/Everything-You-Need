@@ -11,10 +11,10 @@ const initialState = {
     cash: 0, 
     email: "", 
     role: "", 
-    password: ""
+    password: "" 
 };
 
-export default function RegisterComponent() {
+export default function Register() {
 
   const [formState, setFormState] = useState(initialState);
 
@@ -51,7 +51,7 @@ export default function RegisterComponent() {
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
-            <h2 class="form-title">Register</h2>
+            <h2 class="title-head-re">Register</h2>
             <form onSubmit={submitHandler} class="register-form">
               <div class="form-group">
                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
