@@ -4,6 +4,7 @@ import { Dropdown } from "semantic-ui-react";
 import registerImg from '../images/register-img.jpg';
 import adminIco from '../images/mufasa.png';
 import userIco from '../images/simba.png'
+import authService from '../services/authentication.service'
 
 const axios = require('axios');
 
@@ -11,29 +12,40 @@ const initialState = {
     username: "",
     cash: 0, 
     email: "", 
-    role: "", 
+    role: "user", 
     password: "" 
 };
 
 export default function Register() {
 
   const [formState, setFormState] = useState(initialState);
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [submitted, setSubmitted] = useState(false);
-
-  const submitHandler = event => {
+  const submitHandler = async event => {
     event.preventDefault();
-    postData();
+    try {
+      await authService.register(formState);
+      alert("Register successfully")
+      setSubmitted(true)
+      
+    } catch (error) {
+      alert(error)
+    }
   };
 
   const postData = () => {
-    const json = JSON.stringify(formState);
-    axios.post(
-      'http://localhost:9000/api/v1/users/register', json, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin' : '*'
-        }
-      });
+    authService.register(
+      formState
+    )
+    // const json = JSON.stringify(formState);
+    // console.log(formState)
+    // axios.post(
+    //   'http://localhost:9000/api/v1/users/register', json, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Access-Control-Allow-Origin' : '*'
+    //     }
+    //   });
   };
 
   const roleOptions = [
@@ -66,6 +78,7 @@ export default function Register() {
                 <label for="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                 <input
                   type="text"
+                  required
                   name="name" id="name"
                   placeholder="Username"
                   value={formState.username}
@@ -78,6 +91,7 @@ export default function Register() {
                 <label for="email"><i className="zmdi zmdi-email"></i></label>
                 <input
                   type="email"
+                  required
                   name="email" id="email"
                   placeholder="Email"
                   value={formState.email}
@@ -90,6 +104,7 @@ export default function Register() {
                 <label for="pass"><i className="zmdi zmdi-lock"></i></label>
                 <input
                   type="password"
+                  requird
                   name="pass" id="pass"
                   placeholder="Password"
                   value={formState.password}
@@ -102,6 +117,7 @@ export default function Register() {
                 <label for="re-pass"><i className="zmdi zmdi-lock-outline"></i></label>
                 <input
                   type="password"
+                  required
                   name="re-pass" id="re-pass"
                   placeholder="Repeat your password"
                 />
