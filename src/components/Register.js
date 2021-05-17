@@ -10,7 +10,7 @@ const initialState = {
     password: "" 
 };
 
-export default function RegisterComponent() {
+export default function Register() {
 
   const [formState, setFormState] = useState(initialState);
 

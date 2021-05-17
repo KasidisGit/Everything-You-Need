@@ -1,7 +1,8 @@
-import RegisterComponent from './components/RegisterComponent.js';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Product from './components/Product';
+import Register from './components/Register';
+import AddProduct from './components/AddProduct';
+import ListProduct from './components/ListProduct';
 import Login from './components/Login';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
 
@@ -11,11 +12,20 @@ function App() {
     <div className="outer">
       <div className="inner">
         <Switch>
-          <Route path='/' exact={true} component={Login} />
-          <Route path='/product' component={Product} />
-          <Route path='/login' component={Login} />
+          <Route path='/' exact={true}>
+            <Login />
+          </Route>
+          <Route path='/addproduct'>
+            <AddProduct />
+          </Route>
+          <Route path='/listproduct'>
+            <ListProduct />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
           <Route path='/register'>
-            <RegisterComponent />
+            <Register />
           </Route>
         </Switch>
       </div>
