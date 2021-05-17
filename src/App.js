@@ -4,9 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import AddProduct from './components/AddProduct';
-import ListProduct from './components/ListProduct';
-import BuyProduct from './components/BuyProduct'
+
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -29,17 +27,6 @@ function App() {
             <Login />
           </Route>
           <ProtectedRoute path="/"></ProtectedRoute>
-          <Route path='/addproduct'>
-            <AddProduct />
-          </Route>
-          <Route path='/listproduct'>
-            <ListProduct />
-          </Route>
-          <Route path='/buyproduct/:productId'>
-            <BuyProduct />
-          </Route>
-
-          
         </Switch>
         </div>
       </div>
