@@ -1,39 +1,23 @@
 import loginImg from '../images/login-img.jpg';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router'
-
-const axios = require('axios');
-const accessTokenStorage = window.localStorage;
-
-const initialState = {
-  username: "",
-  password: "" 
-};
+import authService from '../services/authentication.service'
 
 export default function Login() {
 
-  const [formState, setFormState] = useState(initialState);
+  // const [formState, setFormState] = useState(initialState);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const submitHandler = event => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    login();
-  };
-
-  const login = async () => {
-    const json = JSON.stringify(formState);
-    await axios.post(
-      'http://localhost:9000/api/v1/users/login', json, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin' : '*'
-        }
-      }).then(res => {
-        setSubmitted(true)
-        accessTokenStorage.setItem('UserAccessToken',res.data.accessToken)
-      }).catch((err)=>{
-        console.error(err)
-      })
+    try {
+      await authService.login(username, password);
+      setSubmitted(true)
+    } catch(error) {
+      alert("Username or password is incorrect")
+    }
   };
 
   if (submitted) {
@@ -60,9 +44,9 @@ export default function Login() {
                       <input
                         type="text"
                         placeholder="Username"
-                        value={formState.username}
+                        value={username}
                         onChange={e => {
-                          setFormState({ ...formState, username: e.target.value });
+                          setUsername(e.target.value);
                         }}
                       />
                   </div>
@@ -71,9 +55,9 @@ export default function Login() {
                       <input
                         type="password"
                         placeholder="Password"
-                        value={formState.password}
+                        value={password}
                         onChange={e => {
-                          setFormState({ ...formState, password: e.target.value });
+                          setPassword(e.target.value);
                         }}
                       />
                   </div>
