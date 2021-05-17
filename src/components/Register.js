@@ -97,7 +97,7 @@ export default function Register() {
                   placeholder="Repeat your password"
                 />
               </div>
-              <div>
+              <div class="form-drop">
                 <Dropdown
                   placeholder="Select role"
                   selection
@@ -109,13 +109,13 @@ export default function Register() {
                 />
               </div>
               <div class="form-group form-button">
-                  <input type="submit" name="register" id="register" class="form-submit" value="Register"/>
+                  <a href="/login" name="register" id="register" class="form-submit form-btn-color">Register</a>
               </div>
             </form>
         </div>
         <div class="signup-image">
           <img class="figure" src={registerImg} alt=""/>
-          <p class="signup-image-link">Already have an account</p>
+          <p class="signup-image-link">Already have an account?</p>
           <a href="/login" class="signup-image-link"><u>Login</u></a>
         </div>
       </div>  

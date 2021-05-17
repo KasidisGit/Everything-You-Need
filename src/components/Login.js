@@ -34,11 +34,12 @@ export default function Login() {
     <div class="container">
       <div class="signin-content">
           <div class="signin-image">
-              <img src={loginImg} alt=""/>
-              <a href="/register" class="signup-image-link"><u>Create an account</u></a>
+              <img class="figure" src={loginImg} alt=""/>
+              <p class="signup-image-link">Don't have an account yet?</p>
+              <a href="/register" class="signup-image-link"><u>Register</u></a>
           </div>
           <div class="signin-form">
-              <h2 class="title-head">Welcome</h2>
+              <h2 class="title-head-log">Welcome</h2>
               <div class="title-text">Please log in</div>
               <form onSubmit={submitHandler} class="register-form">
                   <div class="form-group">
@@ -64,11 +65,11 @@ export default function Login() {
                       />
                   </div>
                   <div class="form-group">
-                      <input type="checkbox" class="agree-term" />
+                      <input type="checkbox" class="agree-term" id="remember-me" />
                       <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                   </div>
                   <div class="form-group form-button">
-                      <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                      <a href="/productlist" name="signin" id="signin" class="form-submit form-btn-color">Log in</a>
                   </div>
               </form>
           </div>
