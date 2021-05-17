@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { Dropdown } from "semantic-ui-react";
+import registerImg from '../images/register-img.jpg';
+import adminIco from '../images/mufasa.png';
+import userIco from '../images/simba.png'
 
 const axios = require('axios');
 
@@ -30,53 +34,91 @@ export default function Register() {
       });
   };
 
-  return (
-    <div className="Register">
+  const roleOptions = [
+    {
+      image: { src: adminIco },
+      text: "Admin",
+      value: "admin"
+    },
+    {
+      image: { src: userIco},
+      text: "User",
+      value: "user"
+    },
+  ];
 
-      <form onSubmit={submitHandler}>
-      <input
-        type="text"
-        placeholder="Name"
-        value={formState.username}
-        onChange={e => {
-          setFormState({ ...formState, username: e.target.value });
-        }}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={formState.email}
-        onChange={e => {
-          setFormState({ ...formState, email: e.target.value });
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={formState.password}
-        onChange={e => {
-          setFormState({ ...formState, password: e.target.value });
-        }}
-      />
-      <input
-        type="text"
-        placeholder="Role"
-        value={formState.role}
-        onChange={e => {
-          setFormState({ ...formState, role: e.target.value });
-        }}
-      />
-      <input
-        type="number"
-        placeholder="Cash"
-        value={formState.cash}
-        onChange={e => {
-          setFormState({ ...formState, cash: e.target.value });
-        }}
-      />
-      <button type="submit" >Confirm</button>
-    </form>
-    
+  return (
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+            <h2 class="title-head-re">Register</h2>
+            <form onSubmit={submitHandler} class="register-form">
+              <div class="form-group">
+                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <input
+                  type="text"
+                  name="name" id="name"
+                  placeholder="Username"
+                  value={formState.username}
+                  onChange={e => {
+                    setFormState({ ...formState, username: e.target.value });
+                  }}
+                />
+              </div>
+              <div class="form-group">
+                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                <input
+                  type="email"
+                  name="email" id="email"
+                  placeholder="Email"
+                  value={formState.email}
+                  onChange={e => {
+                    setFormState({ ...formState, email: e.target.value });
+                  }}
+                />
+              </div>
+              <div class="form-group">
+                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                <input
+                  type="password"
+                  name="pass" id="pass"
+                  placeholder="Password"
+                  value={formState.password}
+                  onChange={e => {
+                  setFormState({ ...formState, password: e.target.value });
+                  }}
+                />
+              </div>
+              <div class="form-group">
+                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                <input
+                  type="password"
+                  name="re-pass" id="re-pass"
+                  placeholder="Repeat your password"
+                />
+              </div>
+              <div>
+                <Dropdown
+                  placeholder="Select role"
+                  selection
+                  options={roleOptions}
+                  value={formState.role}
+                  onChange={e => {
+                    setFormState({ ...formState, role: e.target.value });
+                  }}
+                />
+              </div>
+              <div class="form-group form-button">
+                  <input type="submit" name="register" id="register" class="form-submit" value="Register"/>
+              </div>
+            </form>
+        </div>
+        <div class="signup-image">
+          <img class="figure" src={registerImg} alt=""/>
+          <p class="signup-image-link">Already have an account</p>
+          <a href="/login" class="signup-image-link"><u>Login</u></a>
+        </div>
+      </div>  
     </div>
   );
 }

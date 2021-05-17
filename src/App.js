@@ -1,9 +1,12 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
+import 'semantic-ui-css/semantic.min.css';
+
+import Login from './components/Login';
 import Register from './components/Register';
 import AddProduct from './components/AddProduct';
 import ListProduct from './components/ListProduct';
 import BuyProduct from './components/BuyProduct'
-import Login from './components/Login';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
 
@@ -32,10 +35,10 @@ function App() {
             <Register />
           </Route>
         </Switch>
+        </div>
       </div>
     </div>
-  </div>
-</Router>
+  </Router>
   );
 }
 
