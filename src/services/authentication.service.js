@@ -18,6 +18,10 @@ class AuthService {
       });
   }
 
+  currentUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  }
+
   logout() {
     localStorage.removeItem("user")
   }
@@ -30,3 +34,5 @@ class AuthService {
     })
   }
 }
+
+export default new AuthService()
