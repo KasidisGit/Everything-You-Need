@@ -5,35 +5,39 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AddProduct from './components/AddProduct';
 import ListProduct from './components/ListProduct';
+import BuyProduct from './components/BuyProduct'
 
 function App() {
 
   return (
-    <Router>
-      <div className="App">
-        <div className="outer">
-          <div className="inner">
-            <Switch>
-              <Route path='/' exact={true}>
-                <Login />
-              </Route>
-              <Route path='/addproduct'>
-                <AddProduct />
-              </Route>
-              <Route path='/listproduct'>
-                <ListProduct />
-              </Route>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/register'>
-                <Register />
-              </Route>
-            </Switch>
-          </div>
+<Router>
+  <div className="App">
+    <div className="outer">
+      <div className="inner">
+        <Switch>
+          <Route path='/' exact={true}>
+            <Login />
+          </Route>
+          <Route path='/addproduct'>
+            <AddProduct />
+          </Route>
+          <Route path='/listproduct'>
+            <ListProduct />
+          </Route>
+          <Route path='/buyproduct/:productId'>
+            <BuyProduct />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+        </Switch>
         </div>
       </div>
-    </Router>
+    </div>
+  </Router>
   );
 }
 
