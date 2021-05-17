@@ -22,6 +22,7 @@ a:focus, a:active {
   -ms-transition: all 300ms ease 0s; }
 
 input, select, textarea {
+  font-weight: 300;
   outline: none;
   appearance: unset !important;
   -moz-appearance: unset !important;
@@ -55,9 +56,6 @@ input[type=checkbox] {
 img {
   max-width: 100%;
   height: auto; }
-
-figure {
-  margin: 0; }
 
 p {
   margin-bottom: 0px;
@@ -241,14 +239,14 @@ input {
   input:focus {
     border-bottom: 1px solid #222; }
     input:focus::-webkit-input-placeholder {
-      color: #222; }
+        color: transparent; }
     input:focus::-moz-placeholder {
-      color: #222; }
+        color: transparent; }
     input:focus:-ms-input-placeholder {
-      color: #222; }
+        color: transparent; }
     input:focus:-moz-placeholder {
-      color: #222; }
-
+        color: transparent; }
+        
 input[type=checkbox]:not(old) {
   width: 2em;
   margin: 0;
@@ -415,4 +413,3 @@ label.valid {
     padding: 0 30px; }
 
 }
-

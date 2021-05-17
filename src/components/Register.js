@@ -66,6 +66,7 @@ export default function Register() {
                 <label for="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                 <input
                   type="text"
+                  required
                   name="name" id="name"
                   placeholder="Username"
                   value={formState.username}
@@ -78,6 +79,7 @@ export default function Register() {
                 <label for="email"><i className="zmdi zmdi-email"></i></label>
                 <input
                   type="email"
+                  required
                   name="email" id="email"
                   placeholder="Email"
                   value={formState.email}
@@ -90,6 +92,7 @@ export default function Register() {
                 <label for="pass"><i className="zmdi zmdi-lock"></i></label>
                 <input
                   type="password"
+                  required
                   name="pass" id="pass"
                   placeholder="Password"
                   value={formState.password}
@@ -102,6 +105,7 @@ export default function Register() {
                 <label for="re-pass"><i className="zmdi zmdi-lock-outline"></i></label>
                 <input
                   type="password"
+                  required
                   name="re-pass" id="re-pass"
                   placeholder="Repeat your password"
                 />
@@ -109,6 +113,7 @@ export default function Register() {
               <div className="form-drop">
                 <Dropdown
                   placeholder="Select role"
+                  required
                   selection
                   options={roleOptions}
                   value={formState.role}
