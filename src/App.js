@@ -3,11 +3,13 @@ import 'semantic-ui-css/semantic.min.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import AddProduct from './components/AddProduct';
-import ListProduct from './components/ListProduct';
-import BuyProduct from './components/BuyProduct'
+
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
+
+  
+  
 
   return (
 <Router>
@@ -15,24 +17,15 @@ function App() {
     <div className="outer">
       <div className="inner">
         <Switch>
-          <Route path='/' exact={true}>
-            <Login />
-          </Route>
-          <Route path='/addproduct'>
-            <AddProduct />
-          </Route>
-          <Route path='/listproduct'>
-            <ListProduct />
-          </Route>
-          <Route path='/buyproduct/:productId'>
-            <BuyProduct />
-          </Route>
-          <Route path='/login'>
-            <Login />
+          <Route path='/' exact={true} component={Login}>
           </Route>
           <Route path='/register'>
             <Register />
           </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <ProtectedRoute path="/"></ProtectedRoute>
         </Switch>
         </div>
       </div>
