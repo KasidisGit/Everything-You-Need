@@ -1,4 +1,11 @@
-#form-add {
-  position: relative;
-  left: 100px;
+.add-product-image {
+  margin-right: 80px;
+  margin-top: 50px; 
+  width: 50%;
+  overflow: hidden; }
+
+.add-product-content {
+  margin-top: 100px;
+  padding-top: 67px;
+  padding-bottom: 87px;
 }
