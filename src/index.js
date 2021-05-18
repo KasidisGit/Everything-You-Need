@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
+import './css/authPage.css';
+import './css/addProduct.css';
+import './css/buyProduct.css';
+
 
 ReactDOM.render(
   <React.StrictMode>
