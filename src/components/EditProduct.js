@@ -6,8 +6,8 @@ const axios = require('axios');
 const initialState = {
     name: "",
     description: "", 
-    available: null, 
-    price: null
+    available: "", 
+    price: ""
 };
 
 export default function EditProduct() {
@@ -59,11 +59,17 @@ export default function EditProduct() {
         formState.description =  selectedProduct.description
       }
       if(!formState.available){
-        formState.available =  selectedProduct.available
+        formState.available = selectedProduct.available
+      }else{
+        let avail = parseFloat(selectedProduct.available) 
+        let add_avail = parseFloat(formState.available)
+        formState.available = avail + add_avail
+
       }
       if(!formState.price){
         formState.price =  selectedProduct.price
       }
+
       const json = JSON.stringify(formState);
       axios.put(
         'http://localhost:9000/api/v1/products/'+productId, json, {
@@ -111,16 +117,17 @@ export default function EditProduct() {
     <div id="main" className="buy-body">
     <section id="leftEdit">
     <h3 className="old-product-name">Product Information</h3>
-    <div className="product-name-edit">Old Name: {selectedProduct.name}</div>
-    <div className="product-des-edit">Old Description: {selectedProduct.description}</div>
-    <div className="product-avail-edit">Old Available: {selectedProduct.available}</div>
-    <div className="product-price-edit">Old Price: {selectedProduct.price}</div>
-    <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
+    <div className="product-name-edit">Name: {selectedProduct.name}</div>
+    <div className="product-des-edit">Description: {selectedProduct.description}</div>
+    <div className="product-avail-edit">Available: {selectedProduct.available}</div>
+    <div className="product-price-edit">Price: {selectedProduct.price}</div>
     </section>
+    <section id="rightEdit">
+    <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
           <form onSubmit={(e) => submitHandler(e)}>
-          <section id="right">
 
-              <div id="amount">
+
+              <div id="amount-edit">
                 <input
                         type="text"
                         placeholder="new name"
@@ -139,7 +146,7 @@ export default function EditProduct() {
                   />
                 <input
                         type="number"
-                        placeholder="new available"
+                        placeholder="add available"
                         value={formState.available}
                         onChange={e => {
                           setFormState({ ...formState, available: e.target.value });
@@ -154,18 +161,18 @@ export default function EditProduct() {
                         }} 
                   />
               </div>
-              
+
               <div id="inline">
               <div id="button-edit">
                   <button className="btn-hover color-1" type="submit">Edit</button>
               </div>
               <div id="button-delete">
-                  <button onClick={(e) => deleteHandler(e)} className="btn-hover color-1" >Delete</button>
+                  <button onClick={(e) => deleteHandler(e)} className="btn-hover color-2" >Delete</button>
               </div>
               </div>
-              </section>
+              
           </form>
-
+          </section>
 
   
       </div>

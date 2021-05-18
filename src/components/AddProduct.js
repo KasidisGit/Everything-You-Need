@@ -1,23 +1,23 @@
 import { useState } from 'react';
-
+import { Redirect } from 'react-router'
 const axios = require('axios');
 
 const initialState = {
     name: "",
     description: "", 
-    available: 0, 
-    price: 0
+    available: "", 
+    price: ""
 };
 
 export default function Product() {
 
   const [formState, setFormState] = useState(initialState);
+  const [submitted, setSubmitted] = useState(false);
 
   const submitHandler = event => {
     event.preventDefault();
     postData();
   };
-
   const postData = () => {
     const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
     const json = JSON.stringify(formState);
@@ -27,14 +27,29 @@ export default function Product() {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
-        }
+        },
+        withCredentials: true
+      }).then(
+          setSubmitted(true)
+      ).catch((err) =>{
+          console.log(err)
       });
   };
 
+  if (submitted) {
+    return <Redirect to={{
+      pathname: '/listproduct',
+      state: {status: 'ok'}
+        }}
+    />
+  } 
+
   return (
-    <section>
-    <h3>Add Product</h3>
+    <div id="main" className="buy-body">
+    <section id="leftEdit">
+    <h1>Add Product</h1>
       <form onSubmit={(e) => submitHandler(e)}>
+      <div id="form-add">
         <div className="form-group">
           <input
             className="form-control"
@@ -46,6 +61,7 @@ export default function Product() {
             }}
           />
         </div>
+
         <div className="form-group">
           <input
             className="form-control"
@@ -79,8 +95,11 @@ export default function Product() {
             }}
           />
         </div>
-        <button type="submit" className="btn btn-primary btn-block">Add Product</button>
+        
+        <button type="submit" className="btn btn-primary btn-block">Add</button>
+      </div>
       </form>
     </section>
+    </div>
   )
 }

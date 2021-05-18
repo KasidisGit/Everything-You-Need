@@ -28,6 +28,7 @@ export default function Register() {
         setSubmitted(true)
       } catch(error) {
         alert(error.response.data.error.message)
+        console.log(formState.password)
       }
     } else {
       alert('Confirm password should be match with password')
@@ -53,13 +54,12 @@ export default function Register() {
     }}
     />
   } 
-
   return (
     <div className="container">
       <div className="signup-content">
         <div className="signup-form">
             <h2 className="title-head-re">Register</h2>
-            <form onSubmit={submitHandler} className="register-form">
+            <form onSubmit={(e) => submitHandler(e)} className="register-form">
               <div className="form-group">
                 <label for="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                 <input
