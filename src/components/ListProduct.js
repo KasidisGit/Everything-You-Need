@@ -20,12 +20,12 @@ export default function ListProduct() {
   };
 
   useEffect( () => {
-
+        const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
         axios.get(
         'http://localhost:9000/api/v1/products', {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ accessTokenStorage.getItem('UserAccessToken') ,
+            'Authorization': 'Bearer '+ accessToken,
             'Access-Control-Allow-Origin' : '*'
           }
           

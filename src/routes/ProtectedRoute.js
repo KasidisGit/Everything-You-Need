@@ -8,7 +8,6 @@ import BuyProduct from '../components/BuyProduct'
 
 const ProtectedRoute = () => {
   const currentUser = authService.currentUser()
-  console.log(currentUser)
   if (!currentUser) {
     return <Redirect to={{pathname: './login'}}/>
   }
