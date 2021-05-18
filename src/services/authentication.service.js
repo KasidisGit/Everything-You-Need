@@ -14,7 +14,6 @@ class AuthService {
         withCredentials: true
       })
       .then(response => {
-        console.log(response.data)
         if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
@@ -34,7 +33,14 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("user")
+    return axios.get(API_URL+"logout", {
+      withCredentials: true
+    }).then( (response) => {
+        localStorage.removeItem("user")
+        return response
+    }
+
+    )
   }
 
   register(data) {

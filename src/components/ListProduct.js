@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Redirect, useLocation, useHistory } from 'react-router-dom';
+<<<<<<< HEAD
 import profile from '../images/profile.jpg'
 import logo from '../images/logo.png'
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
 import Carousel from '../Carousal.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+=======
+import authService from '../services/authentication.service'
+>>>>>>> 57c54262a4e060a87abd265c007c14b7e0eb4d26
 
 const axios = require('axios');
 const LoadingComponent = () => <div> Loading... </div>  
@@ -18,12 +22,23 @@ export default function ListProduct() {
   const [editSubmitted, setEditSubmitted] = useState(false);
   const [productId, setProductId] = useState("")
   const [isLoaded, setIsLoaded] = useState(true)
+  const [islogout, setisLogout] = useState(false);
 
   const buyHandler = (productId) => {
     setBuySubmitted(true)
     setProductId(productId)
 
   };
+
+  const logout = async () =>{
+    try {
+      const result = await authService.logout()
+      console.log(result)
+      setisLogout(true)
+    } catch(error) {
+      alert(error)
+    }
+  }
 
   const editHandler = (productId) => {
     setEditSubmitted(true)
@@ -67,7 +82,12 @@ export default function ListProduct() {
         window.location.reload()
     }
   }
-
+  if (islogout) {
+    return <Redirect to={{
+      pathname: '/login',
+    }}
+    />
+  }
   if (buySubmitted) {
     return <Redirect to={{
       pathname: '/buyproduct/'+productId,
