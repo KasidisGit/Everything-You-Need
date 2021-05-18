@@ -5,6 +5,7 @@ import './css/authPage.css';
 import './css/addProduct.css';
 import './css/buyProduct.css';
 import './css/listProduct.css';
+import './css/editProduct.css';
 
 
 ReactDOM.render(

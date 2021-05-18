@@ -1,3 +1,4 @@
+import { getRoles } from '@testing-library/dom';
 import axios from 'axios';
 
 const API_URL = "http://localhost:9000/api/v1/users/"
@@ -8,9 +9,13 @@ class AuthService {
       .post(API_URL +"login", {
         username,
         password
+      },
+      {
+        withCredentials: true
       })
       .then(response => {
-        if (response.data.accessToken) {
+        console.log(response.data)
+        if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
 
@@ -22,16 +27,18 @@ class AuthService {
     return JSON.parse(localStorage.getItem('user'))
   }
 
+  isAdmin() {
+    const user = this.currentUser()
+    console.log(user)
+    return user.role === "admin"
+  }
+
   logout() {
     localStorage.removeItem("user")
   }
 
-  register(username, email, password,role, cash) {
-    return axios.post(API_URL+"register", {
-      username,
-      email,
-      password
-    })
+  register(data) {
+    return axios.post(API_URL+"register", data)
   }
 }
 

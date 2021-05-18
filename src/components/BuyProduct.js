@@ -17,6 +17,7 @@ export default function BuyProduct() {
   const x =location.pathname.split('/')
   const productId = x[x.length-1]
 
+  
   function RandomImage() {
 	const randomId = Math.floor(Math.random() * 50) + 1;
 	const style = {
@@ -34,16 +35,16 @@ export default function BuyProduct() {
     buy(); 
   };
 
-
   useEffect( () => {
     const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
     axios.get(
     'http://localhost:9000/api/v1/products/'+ productId, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+ accessToken,
-        'Access-Control-Allow-Origin' : '*'
-      }
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Authorization': 'Bearer '+ accessToken,
+      //   'Access-Control-Allow-Origin' : '*'
+      // }
+      withCredentials: true
       
     }).then(product => {
         setSelectedProduct(product.data)
@@ -63,7 +64,8 @@ export default function BuyProduct() {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
-        }
+        },
+        withCredentials: true
       })
       .then(
           setSubmitted(true)
@@ -113,7 +115,7 @@ export default function BuyProduct() {
 				</div>
 			</div>
 			<div id="button">
-				<p className="sum-total">Amount</p>
+				<p className="sum-total">Total: {formState.number*selectedProduct.price} ฿</p>
 				<button className="btn-hover color-1" type="submit">Purchase</button>
 			</div>
 		</form>

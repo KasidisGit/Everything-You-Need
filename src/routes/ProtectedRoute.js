@@ -1,43 +1,48 @@
 import React from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import authService from '../services/authentication.service'
+import authService from '../services/authentication.service';
 import AddProduct from '../components/AddProduct';
 import ListProduct from '../components/ListProduct';
 import BuyProduct from '../components/BuyProduct'
 import EditProduct from '../components/EditProduct'
+import UserProfile from '../components/UserProfile'
+const currentUser = authService.currentUser();
 
 const ProtectedRoute = () => {
-  const currentUser = authService.currentUser()
   if (!currentUser) {
-    return <Redirect to={{pathname: './login'}}/>
+    return <Redirect to={{ pathname: './login' }} />;
   }
   return (
-      <Switch>
-      <Route path='/test'>
-        <p>dfdsf</p>
+    <Switch>
+      <Route exact={true} path="/test2"></Route>
+
+      <Route path="/listproduct">
+        <ListProduct />
       </Route>
-      <Route exact={true} path='/test2'></Route>
-      <Route path='/addproduct'>
+      <Route path="/buyproduct">
+        <BuyProduct />
+      </Route>
+      <Route path="/buyproduct/:productId">
+        <BuyProduct />
+      </Route>
+      <Route path='/user/me'>
+            <UserProfile />
+      </Route>
+      {authService.isAdmin() && (
+        <Switch>
+          <Route path="/addproduct">
             <AddProduct />
           </Route>
-          <Route path='/listproduct'>
-            <ListProduct />
-          </Route>
-          <Route path='/buyproduct'>
-            <BuyProduct />
-        </Route>
-          <Route path='/buyproduct/:productId'>
-            <BuyProduct />
-        </Route>
-        <Route path='/editproduct/:productId'>
+          <Route path="/editproduct/:productId">
             <EditProduct />
-        </Route>
+          </Route>
+        </Switch>
+      )}
       <Route path="*" component={() => "404 NOT FOUND"} />
 
-      </Switch>
-    
-  )
-}
+    </Switch>
+  );
+};
 
 export default ProtectedRoute;

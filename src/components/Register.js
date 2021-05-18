@@ -4,36 +4,34 @@ import { Dropdown } from "semantic-ui-react";
 import registerImg from '../images/register-img.jpg';
 import adminIco from '../images/mufasa.png';
 import userIco from '../images/simba.png'
-
-const axios = require('axios');
+import authService from '../services/authentication.service'
 
 const initialState = {
     username: "",
     cash: 0, 
     email: "", 
-    role: "", 
+    role: "user", 
     password: "" 
 };
 
 export default function Register() {
 
   const [formState, setFormState] = useState(initialState);
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [submitted, setSubmitted] = useState(false);
-
-  const submitHandler = event => {
+  const submitHandler = async event => {
     event.preventDefault();
-    postData();
-  };
-
-  const postData = () => {
-    const json = JSON.stringify(formState);
-    axios.post(
-      'http://localhost:9000/api/v1/users/register', json, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin' : '*'
-        }
-      });
+    if (confirmPassword === formState.password) {
+      try {
+        await authService.register(formState);
+        alert("Register successfully")
+        setSubmitted(true)
+      } catch(error) {
+        alert(error.response.data.error.message)
+      }
+    } else {
+      alert('Confirm password should be match with password')
+    }
   };
 
   const roleOptions = [
@@ -108,6 +106,10 @@ export default function Register() {
                   required
                   name="re-pass" id="re-pass"
                   placeholder="Repeat your password"
+                  value={confirmPassword}
+                  onChange={e => {
+                    setConfirmPassword(e.target.value);
+                    }}
                 />
               </div>
               <div className="form-drop">
