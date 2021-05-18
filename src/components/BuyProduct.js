@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useParams, Redirect } from 'react-router-dom';
+  
 const axios = require('axios');
 const accessTokenStorage = window.localStorage;
 
@@ -9,30 +9,44 @@ const initialState = {
 };
 
 export default function BuyProduct() {
-  
   const [formState, setFormState] = useState(initialState);
-  
-  const submitHandler = event => {
+  const [submitted, setSubmitted] = useState(false);
+  const {productId} = useParams()
+
+  const submitHandler = (event) => {
     event.preventDefault();
-    postData();
+    buy(); 
   };
 
-  const postData = () => {
+  const buy = () => {
     const json = JSON.stringify(formState);
     axios.post(
-      'http://localhost:9000/api/v1/products/buy/'+accessTokenStorage.getItem('productId'), json, {
+      'http://localhost:9000/api/v1/products/buy/'+productId, json, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ accessTokenStorage.getItem('UserAccessToken') ,
           'Access-Control-Allow-Origin' : '*'
         }
-      });
+      })
+      .then(
+          setSubmitted(true)
+        ).catch(err =>{
+            console.error(err)
+        });
   };
+
+  if (submitted) {
+    return <Redirect to={{
+      pathname: '/listproduct',
+      state: {status: 'ok'}
+        }}
+    />
+  }  
 
   return (
     <div className="AddProduct">
 
-    <form onSubmit={submitHandler} >
+    <form onSubmit={(e) => submitHandler(e)} >
     <input
       type="number"
       placeholder="number"
@@ -43,9 +57,6 @@ export default function BuyProduct() {
     />
     <button type="submit">Confirm</button>
   </form>
-  <Link to={{pathname: '/listproduct'}}>
-      back
-  </Link>
   </div>
   )
 }
