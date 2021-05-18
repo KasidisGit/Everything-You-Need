@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router'
+import addProductImg from '../images/add-product.jpg';
+
 const axios = require('axios');
 
 const initialState = {
@@ -45,61 +47,65 @@ export default function Product() {
   } 
 
   return (
-    <div id="main" className="buy-body">
-    <section id="leftEdit">
-    <h1>Add Product</h1>
-      <form onSubmit={(e) => submitHandler(e)}>
-      <div id="form-add">
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Enter Product Name"
-            value={formState.name}
-            onChange={e => {
-              setFormState({ ...formState, name: e.target.value });
-            }}
-          />
-        </div>
-
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Description"
-            value={formState.description}
-            onChange={e => {
-              setFormState({ ...formState, description: e.target.value });
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="number"
-            placeholder="Available"
-            value={formState.available}
-            onChange={e => {
-              setFormState({ ...formState, available: e.target.value });
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="number"
-            placeholder="Price"
-            value={formState.price}
-            onChange={e => {
-              setFormState({ ...formState, price: e.target.value });
-            }}
-          />
-        </div>
-        
-        <button type="submit" className="btn btn-primary btn-block">Add</button>
+    <div className="container">
+      <div className="add-product-content">
+          <div className="signin-form">
+            <h2 className="title-head-log">New Product</h2>
+            <div className="title-text">Add information below to add a new product.</div>
+            <form onSubmit={(e) => submitHandler(e)} className="register-form">
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Enter Product Name"
+                    value={formState.name}
+                    onChange={e => {
+                      setFormState({ ...formState, name: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Description"
+                    value={formState.description}
+                    onChange={e => {
+                      setFormState({ ...formState, description: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="number"
+                    placeholder="Available"
+                    value={formState.available}
+                    onChange={e => {
+                      setFormState({ ...formState, available: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    type="number"
+                    placeholder="Price"
+                    value={formState.price}
+                    onChange={e => {
+                      setFormState({ ...formState, price: e.target.value });
+                    }}
+                  />
+                </div>
+                <div className="form-group form-button button">
+                  <button type="submit" className="btn-hover color-1">Add</button>
+                </div>
+            </form>
+          </div>
+          <div className="add-product-image">
+            <img className="figure" src={addProductImg} alt=""/>
+          </div>
       </div>
-      </form>
-    </section>
-    </div>
+  </div>
   )
 }
