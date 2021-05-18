@@ -43,6 +43,7 @@ export default function Login() {
                       <label for="your-name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                       <input
                         type="text"
+                        required
                         placeholder="Username"
                         value={username}
                         onChange={e => {
@@ -54,6 +55,7 @@ export default function Login() {
                       <label htmlFor="your-pass"><i className="zmdi zmdi-lock"></i></label>
                       <input
                         type="password"
+                        required
                         placeholder="Password"
                         value={password}
                         onChange={e => {
@@ -74,5 +76,3 @@ export default function Login() {
     </div>
   );
 }
-
-

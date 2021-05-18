@@ -15,22 +15,25 @@ const ProtectedRoute = () => {
   }
   return (
     <Switch>
-      <Route path="/test">
-        <p>dfdsf</p>
-      </Route>
-      <Route exact={true} path="/test2"></Route>
-      <Route path="/addproduct">
-        <AddProduct />
-      </Route>
-      <Route path="/listproduct">
-        <ListProduct />
-      </Route>
-      <Route path="/buyproduct/:productId">
-        <BuyProduct />
-      </Route>
-      <Route path="*" component={() => '404 NOT FOUND'} />
-    </Switch>
-  );
-};
+      <Route exact={true} path='/test2'></Route>
+      <Route path='/addproduct'>
+            <AddProduct />
+          </Route>
+          <Route path='/listproduct'>
+            <ListProduct />
+          </Route>
+          <Route path='/buyproduct'>
+            <BuyProduct />
+        </Route>
+          <Route path='/buyproduct/:productId'>
+            <BuyProduct />
+        </Route>
+      <Route path="*" component={() => "404 NOT FOUND"} />
+
+      </Switch>
+      
+    
+  )
+}
 
 export default ProtectedRoute;

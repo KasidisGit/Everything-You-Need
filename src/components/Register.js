@@ -92,7 +92,7 @@ export default function Register() {
                 <label for="pass"><i className="zmdi zmdi-lock"></i></label>
                 <input
                   type="password"
-                  requird
+                  required
                   name="pass" id="pass"
                   placeholder="Password"
                   value={formState.password}
@@ -117,6 +117,7 @@ export default function Register() {
               <div className="form-drop">
                 <Dropdown
                   placeholder="Select role"
+                  required
                   selection
                   options={roleOptions}
                   value={formState.role}
