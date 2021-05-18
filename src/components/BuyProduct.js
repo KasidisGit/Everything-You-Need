@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button, Icon, Label, Input } from 'semantic-ui-react'
 
+import { useParams, Redirect } from 'react-router-dom';
+  
 const axios = require('axios');
 const accessTokenStorage = window.localStorage;
 
@@ -14,10 +16,11 @@ const cost = 500;
 export default function BuyProduct() {
 
   function RandomImage() {
+	const randomId = Math.floor(Math.random() * 50) + 1;
 	const style = {
 		height: '100%',
 		width: '100%',
-        background: 'linear-gradient(135deg,rgba(91, 36, 122, 0.45) 0%,rgba(27, 206, 223, 0.55) 100%),url(https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-12-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604343704000)',
+        background: `url(https://picsum.photos/id/${randomId}/275/455.jpg)`,
 	}
 	return (
 		<div style={style} />
@@ -25,23 +28,39 @@ export default function BuyProduct() {
   }
 
   const [formState, setFormState] = useState(initialState);
-  
-  const submitHandler = event => {
+  const [submitted, setSubmitted] = useState(false);
+  const {productId} = useParams()
+
+  const submitHandler = (event) => {
     event.preventDefault();
-    postData();
+    buy(); 
   };
 
-  const postData = () => {
+  const buy = () => {
+    const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
     const json = JSON.stringify(formState);
     axios.post(
-      'http://localhost:9000/api/v1/products/buy/'+accessTokenStorage.getItem('productId'), json, {
+      'http://localhost:9000/api/v1/products/buy/'+productId, json, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ accessTokenStorage.getItem('UserAccessToken') ,
+          'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
         }
-      });
+      })
+      .then(
+          setSubmitted(true)
+        ).catch(err =>{
+            console.error(err)
+        });
   };
+
+  if (submitted) {
+    return <Redirect to={{
+      pathname: '/listproduct',
+      state: {status: 'ok'}
+        }}
+    />
+  }  
 
   return (
   <div id="main" className="buy-body">
@@ -50,27 +69,38 @@ export default function BuyProduct() {
 		<div className="price"><Label tag size='big' color='teal'>{cost}  ฿</Label></div>
 	</section>
 	<section id="right">
-		<form onSubmit={submitHandler}>
-			<div className="product-name">Product name here naja</div>
+		<div>
+		<a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
+		<a href="/editproduct"><i className="edit-icon zmdi zmdi-edit">edit</i></a>
+		</div>
+		<form onSubmit={(e) => submitHandler(e)}>
+			<div className="product-name">Product name</div>
 			<div className="product-des">Description here naja</div>
 			<div className="product-avail">Available {number}</div>
-			<input
-				className="sum-product"
-      			type="number"
-      			placeholder="number"
-      			value={formState.number}
-      			onChange={e => {
-      			  setFormState({ ...formState, number: e.target.value });
-      			}} 
-			/>
+			<div id="amount">
+				<button id="btn-1" className="ui icon button">
+					<i className="minus icon"></i>
+  				</button>
+				<input
+					className="sum-product"
+      				type="number"
+      				placeholder="number"
+      				value={formState.number}
+      				onChange={e => {
+      				  setFormState({ ...formState, number: e.target.value });
+      				}} 
+				/>
+				<button className="ui icon button">
+				  <i className="plus icon"></i>
+				</button>
+			</div>
 			<div id="button">
-				<p className="sum-total ">Amount</p>
-				<button type="submit">Purchase</button>
+				<p className="sum-total">Amount</p>
+				<button className="btn-hover color-1" type="submit">Purchase</button>
 			</div>
 		</form>
 		
 	</section>
 </div>
-
   )
 }

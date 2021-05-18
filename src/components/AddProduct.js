@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const axios = require('axios');
-const accessTokenStorage = window.localStorage;
 
 const initialState = {
   username: "",
@@ -20,12 +19,13 @@ export default function Product() {
   };
 
   const postData = () => {
+    const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
     const json = JSON.stringify(formState);
     axios.post(
       'http://localhost:9000/api/v1/products', json, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ accessTokenStorage.getItem('UserAccessToken') ,
+          'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
         }
       });
