@@ -26,14 +26,16 @@ export default function ListProduct() {
   };
 
   useEffect( () => {
-        const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
+        // const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
+        // console.log(accessToken)
         axios.get(
         'http://localhost:9000/api/v1/products', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ accessToken,
-            'Access-Control-Allow-Origin' : '*'
-          }
+          // headers: {
+          //   'Content-Type': 'application/json',
+          //   'Authorization': 'Bearer '+ accessToken,
+          //   'Access-Control-Allow-Origin' : '*'
+          // },
+          withCredentials: true
           
         }).then(product => {
             setProducts(product.data.rows)

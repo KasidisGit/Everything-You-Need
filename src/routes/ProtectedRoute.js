@@ -8,7 +8,6 @@ import BuyProduct from '../components/BuyProduct';
 import EditProduct from '../components/EditProduct';
 
 const currentUser = authService.currentUser();
-console.log(authService.isAdmin(), currentUser.userData.role);
 
 const ProtectedRoute = () => {
   if (!currentUser) {

@@ -9,10 +9,13 @@ class AuthService {
       .post(API_URL +"login", {
         username,
         password
+      },
+      {
+        withCredentials: true
       })
       .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+        if (response.data.userData) {
+          localStorage.setItem("user", JSON.stringify(response.data.userData));
         }
 
         return response.data;
@@ -25,7 +28,8 @@ class AuthService {
 
   isAdmin() {
     const user = this.currentUser()
-    return user.userData.role === "admin"
+    console.log(user)
+    // return user.userData.role === "admin"
   }
 
   logout() {
