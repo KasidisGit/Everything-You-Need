@@ -1,17 +1,16 @@
 import React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import authService from '../services/authentication.service';
-import Login from '../components/Login';
+import authService from '../services/authentication.service'
 import AddProduct from '../components/AddProduct';
 import ListProduct from '../components/ListProduct';
-import BuyProduct from '../components/BuyProduct';
+import BuyProduct from '../components/BuyProduct'
+import EditProduct from '../components/EditProduct'
 
 const ProtectedRoute = () => {
-  const currentUser = authService.currentUser();
-  console.log(currentUser);
+  const currentUser = authService.currentUser()
   if (!currentUser) {
-    return <Redirect to={{ pathname: './login' }} />;
+    return <Redirect to={{pathname: './login'}}/>
   }
   return (
     <Switch>
@@ -28,10 +27,12 @@ const ProtectedRoute = () => {
           <Route path='/buyproduct/:productId'>
             <BuyProduct />
         </Route>
+        <Route path='/editproduct/:productId'>
+            <EditProduct />
+        </Route>
       <Route path="*" component={() => "404 NOT FOUND"} />
 
       </Switch>
-      
     
   )
 }
