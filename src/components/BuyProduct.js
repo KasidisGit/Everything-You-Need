@@ -57,9 +57,9 @@ export default function BuyProduct() {
     />
     <button type="submit">Confirm</button>
   </form>
-  <Link to={{pathname: '/listproduct'}}>
+  <Redirect to={{pathname: '/listproduct'}}>
       back
-  </Link>
+  </Redirect>
   <main id="main">
 	<section id="left">
 		<div id="head">

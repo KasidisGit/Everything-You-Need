@@ -39,13 +39,15 @@ export default function ListProduct() {
 
   } , [])
 
-  if ( location.state.status === 'ok'){
-    history.replace('/listproduct',{})
-    window.location.reload()
+  if ( location.state ){
+    if( location.state.status === 'ok'){
+        history.replace('/listproduct',{})
+        window.location.reload()
+    }
   }
 
   if (submitted) {
-    return <Redirect push to={{
+    return <Redirect to={{
       pathname: '/buyproduct/'+productId,
     }}
     />
