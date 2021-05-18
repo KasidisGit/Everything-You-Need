@@ -1,5 +1,5 @@
 
-# Everything You Need Web Application (Frontend)
+# Everything You Need Web Application
 
 “Everything you need” Web Application is an application where we can shop for the product. The features that are included in our web application are a shopping page that shows all of our product descriptions, users can add products that they want to buy. We secure the web application by using functionality from the OWASP security specifications.
 
