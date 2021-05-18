@@ -1,3 +1,4 @@
+import { getRoles } from '@testing-library/dom';
 import axios from 'axios';
 
 const API_URL = "http://localhost:9000/api/v1/users/"
@@ -20,6 +21,11 @@ class AuthService {
 
   currentUser() {
     return JSON.parse(localStorage.getItem('user'))
+  }
+
+  isAdmin() {
+    const user = this.currentUser()
+    return user.userData.role === "admin"
   }
 
   logout() {
