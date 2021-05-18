@@ -26,7 +26,7 @@ export default function Register() {
       try {
         await authService.register(formState);
       } catch(error) {
-        console.log(error.response)
+        alert(error.response.data.error.message)
       }
       // alert("Register successfully")
       // setSubmitted(true)
