@@ -23,30 +23,17 @@ export default function Register() {
   const [submitted, setSubmitted] = useState(false);
   const submitHandler = async event => {
     event.preventDefault();
+    if (confirmPassword === formState.password) {
       try {
         await authService.register(formState);
+        alert("Register successfully")
+        setSubmitted(true)
       } catch(error) {
         alert(error.response.data.error.message)
       }
-      // alert("Register successfully")
-      // setSubmitted(true)
-      
-    
-  };
-
-  const postData = () => {
-    authService.register(
-      formState
-    )
-    // const json = JSON.stringify(formState);
-    // console.log(formState)
-    // axios.post(
-    //   'http://localhost:9000/api/v1/users/register', json, {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Access-Control-Allow-Origin' : '*'
-    //     }
-    //   });
+    } else {
+      alert('Confirm password should be match with password')
+    }
   };
 
   const roleOptions = [
@@ -121,6 +108,10 @@ export default function Register() {
                   required
                   name="re-pass" id="re-pass"
                   placeholder="Repeat your password"
+                  value={confirmPassword}
+                  onChange={e => {
+                    setConfirmPassword(e.target.value);
+                    }}
                 />
               </div>
               <div className="form-drop">
