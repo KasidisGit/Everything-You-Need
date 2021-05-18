@@ -26,9 +26,9 @@ const ProtectedRoute = () => {
       <Route path="/buyproduct/:productId">
         <BuyProduct />
       </Route>
-      <Route path='/user/:userId'>
+      <Route path='/user/me'>
             <UserProfile />
-        </Route>
+      </Route>
       {authService.isAdmin() && (
         <Switch>
           <Route path="/addproduct">

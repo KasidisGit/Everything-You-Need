@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useParams, Redirect } from 'react-router-dom';
-  
+import authService from '../services/authentication.service';
+
 const axios = require('axios');
 
 const initialState = {
@@ -11,16 +12,18 @@ const initialState = {
     password: "" 
 };
 
+const currentUser = authService.currentUser();
+
+
 export default function UserProfile() {
 
     const [formState, setFormState] = useState(initialState);
     const [submitted, setSubmitted] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
     const location = useLocation()
-    const {userId} = useParams()
     const x = location.pathname.split('/')
     const productId = x[x.length-1]
-  
+    const userId = currentUser.id
     const submitHandler = (event) => {
       event.preventDefault();
       update(); 
@@ -29,12 +32,12 @@ export default function UserProfile() {
     useEffect( () => {
       const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
       axios.get(
-      'http://localhost:9000/api/v1/users/'+ userId, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ accessToken,
-          'Access-Control-Allow-Origin' : '*'
-        },
+      'http://localhost:9000/api/v1/users/me', {
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': 'Bearer '+ accessToken,
+        //   'Access-Control-Allow-Origin' : '*'
+        // },
         withCredentials: true
         
       }).then(user => {
