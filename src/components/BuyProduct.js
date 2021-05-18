@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Button, Icon, Label, Input } from 'semantic-ui-react'
 
 const axios = require('axios');
 const accessTokenStorage = window.localStorage;
@@ -8,8 +8,22 @@ const initialState = {
     number: 0
 };
 
+const number = 5;
+const cost = 500;
+
 export default function BuyProduct() {
-  
+
+  function RandomImage() {
+	const style = {
+		height: '100%',
+		width: '100%',
+        background: 'linear-gradient(135deg,rgba(91, 36, 122, 0.45) 0%,rgba(27, 206, 223, 0.55) 100%),url(https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-12-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604343704000)',
+	}
+	return (
+		<div style={style} />
+	)
+  }
+
   const [formState, setFormState] = useState(initialState);
   
   const submitHandler = event => {
@@ -30,74 +44,33 @@ export default function BuyProduct() {
   };
 
   return (
-    <div className="AddProduct">
-
-    <form onSubmit={submitHandler} >
-    <input
-      type="number"
-      placeholder="number"
-      value={formState.number}
-      onChange={e => {
-        setFormState({ ...formState, number: e.target.value });
-      }}
-    />
-    <button type="submit">Confirm</button>
-  </form>
-  <Link to={{pathname: '/listproduct'}}>
-      back
-  </Link>
-  <main id="main">
+  <div id="main" className="buy-body">
 	<section id="left">
-		<div id="head">
-			<h1>Life has great moments</h1>
-			<p>Enjoy them with music!</p>
-		</div>
-		<h3>Only 9.99$</h3>
+		<RandomImage/>
+		<div className="price"><Label tag size='big' color='teal'>{cost}  ฿</Label></div>
 	</section>
 	<section id="right">
-		<h1>Purchase</h1>
-		<form action="#">
-			<div id="form-card" class="form-field">
-				<label for="cc-number">Card number:</label>
-				<input id="cc-number" maxlength="19" placeholder="1111 2222 3333 4444" required/>
+		<form onSubmit={submitHandler}>
+			<div className="product-name">Product name here naja</div>
+			<div className="product-des">Description here naja</div>
+			<div className="product-avail">Available {number}</div>
+			<input
+				className="sum-product"
+      			type="number"
+      			placeholder="number"
+      			value={formState.number}
+      			onChange={e => {
+      			  setFormState({ ...formState, number: e.target.value });
+      			}} 
+			/>
+			<div id="button">
+				<p className="sum-total ">Amount</p>
+				<button type="submit">Purchase</button>
 			</div>
-
-			<div id="form-date" class="form-field">
-				<label for="expiry-month">Expiry date:</label>
-				<div id="date-val">
-					<select id="expiry-month" required>
-															<option id="trans-label_month" value="" default="default" selected="selected">Month</option>
-															<option value="1">01</option>
-															<option value="2">02</option>
-															<option value="3">03</option>
-															<option value="4">04</option>
-															<option value="5">05</option>
-															<option value="6">06</option>
-															<option value="7">07</option>
-															<option value="8">08</option>
-															<option value="9">09</option>
-															<option value="10">10</option>
-															<option value="11">11</option>
-															<option value="12">12</option>
-													</select>
-					<select id="expiry-year" required>
-															<option id="trans-label_year" value="" default="" selected="selected">Year</option>
-													<option value="2018">18</option><option value="2019">19</option><option value="2020">20</option><option value="2021">21</option><option value="2022">22</option><option value="2023">23</option><option value="2024">24</option><option value="2025">25</option><option value="2026">26</option><option value="2027">27</option><option value="2028">28</option><option value="2029">29</option><option value="2030">30</option><option value="2031">31</option><option value="2032">32</option><option value="2033">33</option><option value="2034">34</option><option value="2035">35</option><option value="2036">36</option><option value="2037">37</option><option value="2038">38</option><option value="2039">39</option><option value="2040">40</option><option value="2041">41</option><option value="2042">42</option><option value="2043">43</option><option value="2044">44</option><option value="2045">45</option><option value="2046">46</option><option value="2047">47</option></select>
-				</div>
-			</div>
-			
-			<div id="form-sec-code" class="form-field">
-				<label for="sec-code">Security code:</label>
-				<input type="password" maxlength="3" placeholder="123" required/>
-			</div>
-			
-			<button type="submit">Purchase Premium</button>
 		</form>
+		
 	</section>
-</main>
-  </div>
-  
-
+</div>
 
   )
 }
