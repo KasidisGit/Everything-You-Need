@@ -19,12 +19,13 @@ export default function BuyProduct() {
   };
 
   const buy = () => {
+    const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
     const json = JSON.stringify(formState);
     axios.post(
       'http://localhost:9000/api/v1/products/buy/'+productId, json, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ accessTokenStorage.getItem('UserAccessToken') ,
+          'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
         }
       })
@@ -57,9 +58,6 @@ export default function BuyProduct() {
     />
     <button type="submit">Confirm</button>
   </form>
-  <Redirect to={{pathname: '/listproduct'}}>
-      back
-  </Redirect>
   <main id="main">
 	<section id="left">
 		<div id="head">

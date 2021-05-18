@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Redirect, useLocation, useHistory } from 'react-router-dom';
 
 const axios = require('axios');
-const accessTokenStorage = window.localStorage;
 const LoadingComponent = () => <div> Loading... </div>  
 
 export default function ListProduct() {
