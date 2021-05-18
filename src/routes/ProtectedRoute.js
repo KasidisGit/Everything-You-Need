@@ -4,9 +4,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import authService from '../services/authentication.service';
 import AddProduct from '../components/AddProduct';
 import ListProduct from '../components/ListProduct';
-import BuyProduct from '../components/BuyProduct';
-import EditProduct from '../components/EditProduct';
-
+import BuyProduct from '../components/BuyProduct'
+import EditProduct from '../components/EditProduct'
+import UserProfile from '../components/UserProfile'
 const currentUser = authService.currentUser();
 
 const ProtectedRoute = () => {
@@ -26,7 +26,9 @@ const ProtectedRoute = () => {
       <Route path="/buyproduct/:productId">
         <BuyProduct />
       </Route>
-      
+      <Route path='/user/:userId'>
+            <UserProfile />
+        </Route>
       {authService.isAdmin() && (
         <Switch>
           <Route path="/addproduct">
@@ -37,8 +39,7 @@ const ProtectedRoute = () => {
           </Route>
         </Switch>
       )}
-
-      <Route path="*" component={() => '404 NOT FOUND'} />
+      <Route path="*" component={() => "404 NOT FOUND"} />
 
     </Switch>
   );

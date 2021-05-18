@@ -73,7 +73,7 @@ export default function ListProduct() {
   return (
     <div className="ListProduct">
         { products.map((element, idx) => {
-
+            
             return <div key={idx}>
             <pre>
                 {JSON.stringify(element,0,2)}

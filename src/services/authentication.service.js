@@ -14,8 +14,9 @@ class AuthService {
         withCredentials: true
       })
       .then(response => {
-        if (response.data.userData) {
-          localStorage.setItem("user", JSON.stringify(response.data.userData));
+        console.log(response.data)
+        if (response.data) {
+          localStorage.setItem("user", JSON.stringify(response.data));
         }
 
         return response.data;
@@ -29,7 +30,7 @@ class AuthService {
   isAdmin() {
     const user = this.currentUser()
     console.log(user)
-    // return user.userData.role === "admin"
+    return user.role === "admin"
   }
 
   logout() {
