@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
 import authService from '../services/authentication.service';
 import AddProduct from '../components/AddProduct';
@@ -39,7 +39,12 @@ const ProtectedRoute = () => {
           </Route>
         </Switch>
       )}
-      <Route path="*" component={() => "404 NOT FOUND"} />
+      <Route path="*" component={() => (<>
+          <h2>404 NOT FOUND:</h2> 
+          <h1>Please go <Link style={{"text-decoration": "underline"}} 
+          to={{ pathname: "/listproduct"}}>back</Link> to the product page  :^)</h1>
+          </> 
+      )}/>
 
     </Switch>
   );
