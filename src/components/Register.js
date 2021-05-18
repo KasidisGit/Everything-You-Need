@@ -6,8 +6,6 @@ import adminIco from '../images/mufasa.png';
 import userIco from '../images/simba.png'
 import authService from '../services/authentication.service'
 
-const axios = require('axios');
-
 const initialState = {
     username: "",
     cash: 0, 
