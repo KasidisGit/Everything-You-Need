@@ -88,8 +88,8 @@ export default function BuyProduct() {
 	</section>
 	<section id="right">
 		<div>
-		<a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
-		<a href="/editproduct"><i className="edit-icon zmdi zmdi-edit">edit</i></a>
+		  <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
+		  <a href="/editproduct"><i className="edit-icon zmdi zmdi-edit">edit</i></a>
 		</div>
 		<form onSubmit={(e) => submitHandler(e)}>
 			<div className="product-name">{selectedProduct.name}</div>

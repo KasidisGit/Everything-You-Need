@@ -1,4 +1,3 @@
-
 #main {
 	position: relative;
 	width: 550px;
@@ -53,13 +52,12 @@
 }
 
 .edit-icon {
-	font-size: 14px;
+	font-size: 15px;
 	margin-top: -15%;
-	margin-left: 87%;
+	margin-left: 85%;
 	position: absolute;
 	color: teal;
 }
-
 
 #right {
 	position: absolute;
@@ -86,7 +84,7 @@
 }
 
 #right .product-avail {
-	font-size: 18px;
+	font-size: 16px;
 	margin-top: 8px;
 	color: black;
 }
@@ -94,8 +92,10 @@
 #right .sum-product {
 	font-size: 16px;
 	margin-top: 20px;
+	margin-bottom: 5px;
 	color: black;
 	width: 30%;
+	text-align: center;
 }
 
 #right .sum-product-button {
@@ -126,11 +126,11 @@
 }
 
 #right .sum-total {
-	padding: 11px;
-	padding-bottom: 13px;
-	border: 0.5px solid rgb(90, 90, 90);
+	padding: 12px;
+	padding-bottom: 12px;
+	border: 0.5px solid rgb(156, 155, 155);
 	border-radius: 90px;
-	color: rgb(90, 90, 90);
+	color: rgb(129, 129, 129);
 	font-size: 10pt;
 	width: 70%;
 	margin-left: 18px;
@@ -142,7 +142,6 @@
 
 #amount > button, input {
 	display: inline-block;
-    text-align: center;
 }
 
 #amount #btn-1 {
