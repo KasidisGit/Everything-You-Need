@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Redirect, useLocation, useHistory } from 'react-router-dom';
-<<<<<<< HEAD
 import profile from '../images/profile.jpg'
 import logo from '../images/logo.png'
 import { Button, Card, Icon, Image } from 'semantic-ui-react'
 import Carousel from '../Carousal.js';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-=======
 import authService from '../services/authentication.service'
->>>>>>> 57c54262a4e060a87abd265c007c14b7e0eb4d26
 
 const axios = require('axios');
 const LoadingComponent = () => <div> Loading... </div>  
