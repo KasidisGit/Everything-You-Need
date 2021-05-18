@@ -9,12 +9,18 @@ export default function ListProduct() {
   const location = useLocation()
   const history = useHistory()
   const [products, setProducts] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
+  const [buySubmitted, setBuySubmitted] = useState(false);
+  const [editSubmitted, setEditSubmitted] = useState(false);
   const [productId, setProductId] = useState("")
   const [isLoaded, setIsLoaded] = useState(true)
 
-  const submitHandler = (productId) => {
-    setSubmitted(true)
+  const buyHandler = (productId) => {
+    setBuySubmitted(true)
+    setProductId(productId)
+  };
+
+  const editHandler = (productId) => {
+    setEditSubmitted(true)
     setProductId(productId)
   };
 
@@ -45,12 +51,18 @@ export default function ListProduct() {
     }
   }
 
-  if (submitted) {
+  if (buySubmitted) {
     return <Redirect to={{
       pathname: '/buyproduct/'+productId,
     }}
     />
-  }  
+  } 
+  if (editSubmitted) {
+    return <Redirect to={{
+      pathname: '/editproduct/'+productId,
+    }}
+    />
+  } 
   if (isLoaded){
       return < LoadingComponent />
   }
@@ -60,13 +72,13 @@ export default function ListProduct() {
         { products.map((element, idx) => {
 
             return <div key={idx}>
-            <pre >
+            <pre>
                 {JSON.stringify(element,0,2)}
             </pre>
-            <button onClick={() => submitHandler(element.id)}>Buy</button>
-            </div>
-        }) }
-
+            <button onClick={() => buyHandler(element.id)}>Buy</button>
+            <button onClick={() => editHandler(element.id)}>Edit</button>
+        </div>
+    })}
     </div>
   )}
 }

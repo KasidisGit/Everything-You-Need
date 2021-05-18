@@ -3,7 +3,7 @@ import { useState } from 'react';
 const axios = require('axios');
 
 const initialState = {
-  username: "",
+  name: "",
   cash: 0, 
   email: "", 
   password: ""
@@ -34,9 +34,8 @@ export default function Product() {
   return (
     <section>
     <h3>Add Product</h3>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)}>
         <div className="form-group">
-          <label>Product Name</label>
           <input
             className="form-control"
             type="text"
@@ -48,7 +47,6 @@ export default function Product() {
           />
         </div>
         <div className="form-group">
-          <label>Description</label>
           <input
             className="form-control"
             type="text"
@@ -60,7 +58,6 @@ export default function Product() {
           />
         </div>
         <div className="form-group">
-          <label>Available</label>
           <input
             className="form-control"
             type="number"
@@ -72,7 +69,6 @@ export default function Product() {
           />
         </div>
         <div className="form-group">
-          <label>Price</label>
           <input
             className="form-control"
             type="number"
@@ -83,8 +79,8 @@ export default function Product() {
             }}
           />
         </div>
+        <button type="submit" className="btn btn-primary btn-block">Add Product</button>
       </form>
-    <button type="submit" className="btn btn-primary btn-block">Add Product</button>
     </section>
   )
 }
