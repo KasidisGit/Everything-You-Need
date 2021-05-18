@@ -17,6 +17,7 @@ export default function BuyProduct() {
   const x =location.pathname.split('/')
   const productId = x[x.length-1]
 
+  
   function RandomImage() {
 	const randomId = Math.floor(Math.random() * 50) + 1;
 	const style = {
@@ -33,7 +34,6 @@ export default function BuyProduct() {
     event.preventDefault();
     buy(); 
   };
-
 
   useEffect( () => {
     const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
@@ -113,7 +113,7 @@ export default function BuyProduct() {
 				</div>
 			</div>
 			<div id="button">
-				<p className="sum-total">Amount</p>
+				<p className="sum-total">Total: {formState.number*selectedProduct.price} ฿</p>
 				<button className="btn-hover color-1" type="submit">Purchase</button>
 			</div>
 		</form>

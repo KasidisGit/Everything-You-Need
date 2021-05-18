@@ -6,6 +6,7 @@ import AddProduct from '../components/AddProduct';
 import ListProduct from '../components/ListProduct';
 import BuyProduct from '../components/BuyProduct'
 import EditProduct from '../components/EditProduct'
+import UserProfile from '../components/UserProfile'
 
 const ProtectedRoute = () => {
   const currentUser = authService.currentUser()
@@ -32,6 +33,9 @@ const ProtectedRoute = () => {
         </Route>
         <Route path='/editproduct/:productId'>
             <EditProduct />
+        </Route>
+        <Route path='/user/:userId'>
+            <UserProfile />
         </Route>
       <Route path="*" component={() => "404 NOT FOUND"} />
 

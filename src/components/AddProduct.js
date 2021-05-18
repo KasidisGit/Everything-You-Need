@@ -3,10 +3,10 @@ import { useState } from 'react';
 const axios = require('axios');
 
 const initialState = {
-  name: "",
-  cash: 0, 
-  email: "", 
-  password: ""
+    name: "",
+    description: "", 
+    available: 0, 
+    price: 0
 };
 
 export default function Product() {
