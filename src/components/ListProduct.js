@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Redirect, useLocation, useHistory } from 'react-router-dom';
+import authService from '../services/authentication.service'
 
 const axios = require('axios');
 const LoadingComponent = () => <div> Loading... </div>  
@@ -13,12 +14,23 @@ export default function ListProduct() {
   const [editSubmitted, setEditSubmitted] = useState(false);
   const [productId, setProductId] = useState("")
   const [isLoaded, setIsLoaded] = useState(true)
+  const [islogout, setisLogout] = useState(false);
 
   const buyHandler = (productId) => {
     setBuySubmitted(true)
     setProductId(productId)
 
   };
+
+  const logout = async () =>{
+    try {
+      const result = await authService.logout()
+      console.log(result)
+      setisLogout(true)
+    } catch(error) {
+      alert(error)
+    }
+  }
 
   const editHandler = (productId) => {
     setEditSubmitted(true)
@@ -53,7 +65,12 @@ export default function ListProduct() {
         window.location.reload()
     }
   }
-
+  if (islogout) {
+    return <Redirect to={{
+      pathname: '/login',
+    }}
+    />
+  }
   if (buySubmitted) {
     return <Redirect to={{
       pathname: '/buyproduct/'+productId,
@@ -72,6 +89,9 @@ export default function ListProduct() {
   else{
   return (
     <div className="ListProduct">
+      <button onClick={() => logout()}>
+        Logout
+      </button>
         { products.map((element, idx) => {
             
             return <div key={idx}>
