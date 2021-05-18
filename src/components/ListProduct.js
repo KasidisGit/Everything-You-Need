@@ -17,6 +17,7 @@ export default function ListProduct() {
   const buyHandler = (productId) => {
     setBuySubmitted(true)
     setProductId(productId)
+
   };
 
   const editHandler = (productId) => {
@@ -78,7 +79,7 @@ export default function ListProduct() {
             <button onClick={() => buyHandler(element.id)}>Buy</button>
             <button onClick={() => editHandler(element.id)}>Edit</button>
         </div>
-    })}
+        })}
     </div>
   )}
 }
