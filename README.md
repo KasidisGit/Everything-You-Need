@@ -30,5 +30,6 @@ npm start
 | 6110546003 | Tiranan Emson |
 | 6110546062 | Sukrita Kittipitayakorn |
 | 6110546364 | Kasidis Luangwutiwong |
-Faculty of Computer Engineering
+
+Faculty of Computer Engineering<br>
 Kasetsart University
