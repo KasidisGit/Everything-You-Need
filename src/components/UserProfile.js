@@ -124,9 +124,9 @@ export default function UserProfile() {
                         type="number"
                         required
                         placeholder="new cash"
-                        value={formState.cash}
+                        value={formState.money}
                         onChange={e => {
-                          setFormState({ ...formState, cash: e.target.value });
+                          setFormState({ ...formState, money: e.target.value });
                         }} 
                   />
               </div>
