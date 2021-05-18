@@ -86,7 +86,7 @@ export default function BuyProduct() {
   <div id="main" className="buy-body">
 	<section id="left">
 		<RandomImage/>
-		<div className="price"><Label tag size='big' color='teal'>Price: {parseInt(selectedProduct.price).toFixed(2)} ฿</Label></div>
+		<div className="price"><Label tag size='big' color='teal'>{parseInt(selectedProduct.price).toFixed(2)} ฿</Label></div>
 	</section>
 	<section id="right">
 		<div>

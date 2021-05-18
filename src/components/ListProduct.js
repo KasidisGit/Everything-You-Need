@@ -113,7 +113,7 @@ export default function ListProduct() {
             <ul className="navbar-nav navbar-nav-right">
               <li className="nav-item nav-profile">
                   <div className="nav-profile-img">
-                    <img src={profile} alt=""/>
+                    <img className="profile-img" src={profile} alt=""/>
                     <span className="availability-status online"></span>
                   </div>
                   <div className="nav-profile-text">

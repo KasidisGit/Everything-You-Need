@@ -1444,6 +1444,7 @@
     color: #343a40!important;
   }
   .text-black-50 {
+    font-size: 15px;
     color: rgba(0, 0, 0, .5)!important;
   }
   .text-white-50 {
@@ -1667,6 +1668,7 @@
     border-right: 1px solid #ebedf2;
   }
   }.text-black {
+    font-size: 15px;
     color: #000;
   }
   .text-small {
@@ -2002,9 +2004,11 @@
     width: calc(100% - 40px);
   }
   }.nav-profile-img {
-    position: relative;
+    position: absolute;
     width: 32px;
     height: 32px;
+    margin-top: -5px;
+    margin-left: -30px;
   }
   .nav-profile-img img {
     width: 32px;
