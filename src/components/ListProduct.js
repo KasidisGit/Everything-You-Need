@@ -143,13 +143,13 @@ export default function ListProduct() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/profile">
+                <a className="nav-link" href="/user/me">
                   <span className="menu-title"><i className="icon user"></i>&nbsp;&nbsp;&nbsp;Profile</span>
                   
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/login">
+                <a className="nav-link" href="/" onClick={() => logout()}>
                   <span className="menu-title"><i className="icon sign out"></i>&nbsp;&nbsp;&nbsp;Sign out</span>
                 </a>
               </li>
