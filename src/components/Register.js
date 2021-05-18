@@ -23,14 +23,15 @@ export default function Register() {
   const [submitted, setSubmitted] = useState(false);
   const submitHandler = async event => {
     event.preventDefault();
-    try {
-      await authService.register(formState);
-      alert("Register successfully")
-      setSubmitted(true)
+      try {
+        await authService.register(formState);
+      } catch(error) {
+        console.log(error.response)
+      }
+      // alert("Register successfully")
+      // setSubmitted(true)
       
-    } catch (error) {
-      alert(error)
-    }
+    
   };
 
   const postData = () => {
