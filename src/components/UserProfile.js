@@ -95,7 +95,6 @@ export default function UserProfile() {
               <div id="amount">
                 <input
                         type="email"
-                        required
                         placeholder="new email"
                         value={formState.email}
                         onChange={e => {
@@ -104,7 +103,6 @@ export default function UserProfile() {
                   />
                 <input
                         type="number"
-                        required
                         placeholder="new cash"
                         value={formState.money}
                         onChange={e => {
@@ -120,7 +118,7 @@ export default function UserProfile() {
               </div>
               </section>
           </form>
-          
+
       </div>
     </>
     )
