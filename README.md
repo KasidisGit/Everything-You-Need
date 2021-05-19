@@ -1,25 +1,25 @@
 
 # Everything You Need Web Application
 
-“Everything you need” Web Application is an application where we can shop for the product. The features that are included in our web application are a shopping page that shows all of our product descriptions, users can add products that they want to buy. We secure the web application by using functionality from the OWASP security specifications.
+The application where we can shop for the product. The features that are included in our web application are a shopping page that shows all of our product descriptions, users can add products that they want to buy. We secure the web application by using functionality from the OWASP security specifications.
 
 ## Prerequisite
 - Node.js
 ## Installation
-
-1. Clone or download this repository to your local machine.
+1. Follow the [secure-project](https://github.com/kornkritpawit/secure-project). You need to install and run that repository first.
+2. Clone or download this repository to your local machine.
 ```
 git clone https://github.com/KasidisGit/frontend_client
 ```
-2. Install dependencies
+3. Install dependencies
 ```
 npm install
 ```
-3. Run Application
+4. Run Application
 ```
 npm start
 ```
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Members
 | Student ID | Name |
