@@ -9,7 +9,6 @@ const initialState = {
     cash: "", 
     email: "", 
     role: "", 
-    password: "" 
 };
 
 const currentUser = authService.currentUser();
@@ -74,7 +73,7 @@ export default function UserProfile() {
           },
           withCredentials: true
         })
-        .then( (response) => {
+        .then( () => {
           alert('Update profile successful')
           setSubmitted(true)
         }

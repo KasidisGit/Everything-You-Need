@@ -20,6 +20,8 @@ export default function ListProduct() {
   const [productId, setProductId] = useState("")
   const [isLoaded, setIsLoaded] = useState(true)
   const [islogout, setisLogout] = useState(false);
+  const [addSubmitted, setAddSubmitted] = useState(false)
+  const [money, setmoney] = useState(0)
 
   const buyHandler = (productId) => {
     setBuySubmitted(true)
@@ -42,16 +44,27 @@ export default function ListProduct() {
     setProductId(productId)
   };
 
+  const addHandler = () => {
+    setAddSubmitted(true)
+  };
+
+    useEffect( () => {
+      axios.get(
+      'http://localhost:9000/api/v1/users/'+authService.currentUser().id, {
+        withCredentials: true
+        
+      }).then(user => {
+        setmoney(user.data.cash)
+      })
+      .catch(err => {
+          console.error(err)
+      });
+  
+      } , [])
+
   useEffect( () => {
-        // const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
-        // console.log(accessToken)
         axios.get(
         'http://localhost:9000/api/v1/products', {
-          // headers: {
-          //   'Content-Type': 'application/json',
-          //   'Authorization': 'Bearer '+ accessToken,
-          //   'Access-Control-Allow-Origin' : '*'
-          // },
           withCredentials: true
           
         }).then(product => {
@@ -95,6 +108,12 @@ export default function ListProduct() {
     }}
     />
   } 
+  if (addSubmitted) {
+    return <Redirect to={{
+      pathname: '/addproduct/',
+    }}
+    />
+  } 
   if (isLoaded){
       return < LoadingComponent />
   }
@@ -115,7 +134,7 @@ export default function ListProduct() {
                     <span className="availability-status online"></span>
                   </div>
                   <div className="nav-profile-text">
-                    <p className="text-black">Jimin SudLorh</p>
+                    <p className="text-black">{authService.currentUser().username}</p>
                   </div>
               </li>
             </ul>
@@ -130,8 +149,9 @@ export default function ListProduct() {
                     <img src={profile} alt=""/>
                   </div>
                   <div className="nav-profile-text d-flex flex-column">
-                    <span className="font-weight-bold mb-2">Jimin SudLorh</span>
-                    <span className="text-secondary">Role: Dancer</span>
+                    <span className="font-weight-bold mb-2">{authService.currentUser().username}</span>
+                    <span className="text-secondary">Role: {authService.currentUser().role}</span>
+                    <span className="text-secondary">Cash: {money || 0}</span>
                   </div>
                 </div>
               </li>
@@ -153,7 +173,9 @@ export default function ListProduct() {
               </li>
               <li className="nav-item sidebar-actions">
                 <span className="nav-link">
-                  <button className="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a product</button>
+                {authService.isAdmin() && (
+                  <button onClick={() => addHandler()} className="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a product</button>
+                )}
                 </span>
               </li>
             </ul>
@@ -186,10 +208,12 @@ export default function ListProduct() {
                       </Card.Content>
                       <Card.Content extra>
                       <div className='two buttons'>
-                      
+                      {authService.isAdmin() && (
                         <Button circular icon='edit' onClick={() => editHandler(element.id)} />
+                      )
+                      }
                         <Button animated='vertical' color='teal' onClick={() => buyHandler(element.id)}  className='shop-btn'>
-                          
+
                           <Button.Content hidden>Shop</Button.Content>
                           <Button.Content visible>
                             <Icon name='shop' />
