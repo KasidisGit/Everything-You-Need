@@ -12,26 +12,33 @@ const initialState = {
 
 export default function EditProduct() {
 
-    const [formState, setFormState] = useState(initialState);
+    const [formState, setFormState] = useState(initialState)
     const [submitted, setSubmitted] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState({});
+    const [selectedProduct, setSelectedProduct] = useState({})
+    const [selectedProductInit, setSelectedProductInitial] = useState({})
     const location = useLocation()
     const x = location.pathname.split('/')
     const productId = x[x.length-1]
   
     const submitHandler = (event) => {
       event.preventDefault();
-      update(); 
+      updateProduct(); 
     };
 
     const deleteHandler = (event) => {
         event.preventDefault();
         deleteProduct(); 
     };
+
+    const cancelHandler = (event) => {
+      event.preventDefault();
+      setSelectedProduct(selectedProductInit);
+      setFormState(initialState)
+    };
   
   
     useEffect( () => {
-      const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
+      const accessToken = JSON.parse(localStorage.getItem('user')).accessToken
       axios.get(
       'http://localhost:9000/api/v1/products/'+ productId, {
         headers: {
@@ -43,6 +50,7 @@ export default function EditProduct() {
 
       }).then(product => {
           setSelectedProduct(product.data)
+          setSelectedProductInitial(product.data)
       })
       .catch(err => {
           console.error(err)
@@ -50,7 +58,7 @@ export default function EditProduct() {
   
       } , [])
   
-    const update = () => {
+    const updateProduct = () => {
       const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
       if(!formState.name){
         formState.name =  selectedProduct.name
@@ -113,69 +121,62 @@ export default function EditProduct() {
     }  
   
     return (
-        <>
-    <div id="main" className="buy-body">
-    <section id="leftEdit">
-    <h3 className="old-product-name">Product Information</h3>
-    <div className="product-name-edit">Name: {selectedProduct.name}</div>
-    <div className="product-des-edit">Description: {selectedProduct.description}</div>
-    <div className="product-avail-edit">Available: {selectedProduct.available}</div>
-    <div className="product-price-edit">Price: {selectedProduct.price}</div>
-    </section>
-    <section id="rightEdit">
-    <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
-          <form onSubmit={(e) => submitHandler(e)}>
-
-
-              <div id="amount-edit">
-                <input
-                        type="text"
-                        placeholder="new name"
-                        value={formState.name}
-                        onChange={e => {
-                          setFormState({ ...formState, name: e.target.value });
-                        }} 
-                  />
-                <input
-                        type="text"
-                        placeholder="new description"
-                        value={formState.description}
-                        onChange={e => {
-                          setFormState({ ...formState, description: e.target.value });
-                        }} 
-                  />
-                <input
-                        type="number"
-                        placeholder="add available"
-                        value={formState.available}
-                        onChange={e => {
-                          setFormState({ ...formState, available: e.target.value });
-                        }} 
-                  />
-                <input
-                        type="number"
-                        placeholder="new price"
-                        value={formState.price}
-                        onChange={e => {
-                          setFormState({ ...formState, price: e.target.value });
-                        }} 
-                  />
-              </div>
-
-              <div id="inline">
-              <div id="button-edit">
-                  <button className="btn-hover color-1" type="submit">Edit</button>
-              </div>
-              <div id="button-delete">
-                  <button onClick={(e) => deleteHandler(e)} className="btn-hover color-2" >Delete</button>
-              </div>
-              </div>
-              
-          </form>
-          </section>
-
-  
+    <div id="edit-main">
+      <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left back-place"></i></a>
+      <h3 className="old-product-name">Product Information</h3>
+      <div className="font-normal">Name: {selectedProduct.name}</div>
+      <div className="font-normal">Description: {selectedProduct.description}</div>
+      <div className="font-normal">Available: {selectedProduct.available}</div>
+      <div className="font-normal">Price: {selectedProduct.price}</div>
+      <div id="button-delete">
+        <button onClick={(e) => deleteHandler(e)} className="btn-hover2 color-3" >Delete</button>
       </div>
-    </>
+      <h3 className="old-product-name">New Product Information</h3>
+      <form onSubmit={(e) => submitHandler(e)} id="editForm">
+        <div className="font-normal" >
+          <input
+          id="editForm"
+              type="text"
+              placeholder="New Product Name"
+              value={formState.name}
+              onChange={e => {
+                setFormState({ ...formState, name: e.target.value });
+                setSelectedProduct({ ...selectedProduct, name: e.target.value });
+              }} 
+          />
+          <input
+              type="text"
+              placeholder="New Description"
+              value={formState.description}
+              onChange={e => {
+                setFormState({ ...formState, description: e.target.value });
+                setSelectedProduct({ ...selectedProduct, description: e.target.value });
+              }} 
+          />
+          <input
+              type="number"
+              placeholder="New Available"
+              value={formState.available}
+              onChange={e => {
+                setFormState({ ...formState, available: e.target.value });
+                setSelectedProduct({ ...selectedProduct, available: e.target.value });
+              }} 
+          />
+          <input
+              type="number"
+              placeholder="New Price"
+              value={formState.price}
+              onChange={e => {
+                setFormState({ ...formState, price: e.target.value });
+                setSelectedProduct({ ...selectedProduct, price: e.target.value });
+              }} 
+          />
+        </div>
+        <div id="group-button">
+            <button className="btn-hover2 color-4" type="submit">Edit</button>
+            <button className="btn-hover2 color-2" onClick={(e) => cancelHandler(e)}>Clear</button>
+        </div>
+      </form>
+    </div>
     )
 }
