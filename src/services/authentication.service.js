@@ -15,6 +15,7 @@ class AuthService {
         headers: {
           Accepts: "application/json",
           "Content-Type": "application/json",
+          "CSRF-Token": csrf
         },
         withCredentials: true
       })
@@ -60,8 +61,16 @@ class AuthService {
     )
   }
 
-  register(data) {
-    return axios.post(API_URL+"register", data)
+  register(data, csrf) {
+    return axios.post(API_URL+"register", data,
+    {
+      headers: {
+        Accepts: "application/json",
+        "Content-Type": "application/json",
+        "CSRF-Token": csrf
+      },
+      withCredentials: true
+    })
   }
 }
 
