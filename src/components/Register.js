@@ -1,4 +1,4 @@
-import { useState } from 'react';
+  import { useState } from 'react';
 import { Redirect } from 'react-router'
 import { Dropdown } from "semantic-ui-react";
 import registerImg from '../images/register-img.jpg';
@@ -19,6 +19,7 @@ export default function Register() {
   const [formState, setFormState] = useState(initialState);
   const [confirmPassword, setConfirmPassword] = useState('')
   const [submitted, setSubmitted] = useState(false);
+  const [roleState,setRoleState] = useState("user")
   const submitHandler = async event => {
     event.preventDefault();
     if (confirmPassword === formState.password) {
@@ -46,6 +47,12 @@ export default function Register() {
       value: "user"
     },
   ];
+
+
+  const handleChange = (e, { value }) => {
+    setRoleState( value )
+    formState.role = value
+  }
 
   if (submitted) {
     return <Redirect push to={{
@@ -118,10 +125,8 @@ export default function Register() {
                   required
                   selection
                   options={roleOptions}
-                  value={formState.role}
-                  onChange={e => {
-                    setFormState({ ...formState, role: e.target.value });
-                  }}
+                  value={roleState}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group form-button">

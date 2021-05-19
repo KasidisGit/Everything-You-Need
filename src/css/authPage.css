@@ -2,7 +2,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css');
 
 /* @extend display-flex; */
-display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .add-product-content {
   display: flex;
   display: -webkit-flex; }
 
@@ -369,7 +369,7 @@ label.valid {
   .container {
     max-width: 1200px; } }
 @media screen and (max-width: 768px) {
-  .signup-content, .signin-content {
+  .signup-content, .signin-content, .add-product-content {
     flex-direction: column;
     -moz-flex-direction: column;
     -webkit-flex-direction: column;

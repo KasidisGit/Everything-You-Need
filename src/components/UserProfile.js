@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useParams, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import authService from '../services/authentication.service';
 
 const axios = require('axios');
@@ -20,9 +20,6 @@ export default function UserProfile() {
     const [formState, setFormState] = useState(initialState);
     const [submitted, setSubmitted] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
-    const location = useLocation()
-    const x = location.pathname.split('/')
-    const productId = x[x.length-1]
     const userId = currentUser.id
     const submitHandler = (event) => {
       event.preventDefault();
@@ -30,14 +27,8 @@ export default function UserProfile() {
     };
   
     useEffect( () => {
-      const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
       axios.get(
       'http://localhost:9000/api/v1/users/me', {
-        // headers: {
-        //   'Content-Type': 'application/json',
-        //   'Authorization': 'Bearer '+ accessToken,
-        //   'Access-Control-Allow-Origin' : '*'
-        // },
         withCredentials: true
         
       }).then(user => {
@@ -62,7 +53,6 @@ export default function UserProfile() {
           formState.role = selectedUser.role
       }
       const json = JSON.stringify(formState);
-      console.log(json)
       axios.put(
         'http://localhost:9000/api/v1/users/'+userId, json, {
           headers: {
@@ -103,17 +93,8 @@ export default function UserProfile() {
           <section id="right">
 
               <div id="amount">
-                {/* <input
-                        type="text"
-                        placeholder="new admin, user"
-                        value={formState.role}
-                        onChange={e => {
-                          setFormState({ ...formState, role: e.target.value });
-                        }} 
-                  /> */}
                 <input
                         type="email"
-                        required
                         placeholder="new email"
                         value={formState.email}
                         onChange={e => {
@@ -122,7 +103,6 @@ export default function UserProfile() {
                   />
                 <input
                         type="number"
-                        required
                         placeholder="new cash"
                         value={formState.money}
                         onChange={e => {
@@ -139,8 +119,6 @@ export default function UserProfile() {
               </section>
           </form>
 
-
-  
       </div>
     </>
     )

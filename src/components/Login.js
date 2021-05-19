@@ -5,7 +5,6 @@ import authService from '../services/authentication.service'
 
 export default function Login() {
 
-  // const [formState, setFormState] = useState(initialState);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
