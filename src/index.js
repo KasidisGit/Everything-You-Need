@@ -5,7 +5,7 @@ import './css/authPage.css';
 import './css/addProduct.css';
 import './css/buyProduct.css';
 import './css/editProduct.css';
-
+import './css/userProfile.css';
 
 ReactDOM.render(
   <React.StrictMode>
