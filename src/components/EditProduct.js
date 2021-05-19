@@ -101,7 +101,7 @@ export default function EditProduct() {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer '+ accessToken ,
             'Access-Control-Allow-Origin' : '*'
-        }
+        }, withCredentials: true
         })
         .then(
             setSubmitted(true)
