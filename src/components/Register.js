@@ -1,4 +1,4 @@
-  import { useState } from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router'
 import { Dropdown } from "semantic-ui-react";
 import registerImg from '../images/register-img.jpg';
