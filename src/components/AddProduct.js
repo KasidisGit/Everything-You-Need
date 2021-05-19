@@ -25,7 +25,7 @@ export default function Product() {
     postData();
   };
 
-  const postData = async() => {
+  const postData = async () => {
     const {csrfToken} = await authService.getCsrf()
     setFormState({ ...formState, _csrf: csrfToken })
     const json = await JSON.stringify(formState);

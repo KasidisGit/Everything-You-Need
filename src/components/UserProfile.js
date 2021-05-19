@@ -48,7 +48,7 @@ export default function UserProfile() {
   
       } , [])
   
-    const updateUser = () => {
+    const updateUser = async () => {
       const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
       formState.username = JSON.parse(localStorage.getItem('user')).username
       if(!formState.email){
