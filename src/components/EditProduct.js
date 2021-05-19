@@ -58,42 +58,40 @@ export default function EditProduct() {
   
       } , [])
   
-    const updateProduct = () => {
-      const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
-      if(!formState.name){
-        formState.name =  selectedProduct.name
-      }
-      if(!formState.description){
-        formState.description =  selectedProduct.description
-      }
-      if(!formState.available){
-        formState.available = selectedProduct.available
-      }else{
-        let avail = parseFloat(selectedProduct.available) 
-        let add_avail = parseFloat(formState.available)
-        formState.available = avail + add_avail
-
-      }
-      if(!formState.price){
-        formState.price =  selectedProduct.price
-      }
-
-      const json = JSON.stringify(formState);
-      axios.put(
-        'http://localhost:9000/api/v1/products/'+productId, json, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ accessToken ,
-            'Access-Control-Allow-Origin' : '*'
-          },
-          withCredentials: true
-        })
-        .then(
-            setSubmitted(true)
-          ).catch(err =>{
-              console.error(err)
-          });
-    };
+      const updateProduct = () => {
+        const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
+        if(!formState.name){
+          formState.name =  selectedProduct.name
+        }
+        if(!formState.description){
+          formState.description =  selectedProduct.description
+        }
+        if(!formState.available){
+          formState.available = selectedProduct.available
+        }else{
+          let avail = parseFloat(selectedProductInit.available) 
+          let add_avail = parseFloat(formState.available)
+          formState.available = avail + add_avail
+        }
+        if(!formState.price){
+          formState.price =  selectedProduct.price
+        }
+        const json = JSON.stringify(formState);
+        axios.put(
+          'http://localhost:9000/api/v1/products/'+productId, json, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer '+ accessToken ,
+              'Access-Control-Allow-Origin' : '*'
+            },
+            withCredentials: true
+          })
+          .then(
+              setSubmitted(true)
+            ).catch(err =>{
+                console.error(err)
+            });
+      };
   
     const deleteProduct = () => {
     const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken

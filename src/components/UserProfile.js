@@ -14,7 +14,6 @@ const initialState = {
 
 const currentUser = authService.currentUser();
 
-
 export default function UserProfile() {
 
     const [formState, setFormState] = useState(initialState);
@@ -69,7 +68,6 @@ export default function UserProfile() {
           });
     };
   
-
     if (submitted) {
       return <Redirect to={{
         pathname: '/listproduct',
@@ -77,7 +75,6 @@ export default function UserProfile() {
           }}
       />
     }  
-  
     return (
         <>
     <div id="main" className="buy-body">
