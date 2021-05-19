@@ -64,6 +64,7 @@ export default function Product() {
             <div className="title-text">Add information below to add a new product.</div>
             <form onSubmit={(e) => submitHandler(e)} className="register-form">
                 <div className="form-group">
+                  <label><i className="zmdi zmdi-flower-alt"></i></label>
                   <input
                     className="form-control"
                     type="text"
@@ -75,10 +76,11 @@ export default function Product() {
                   />
                 </div>
                 <div className="form-group">
+                  <label><i className="zmdi zmdi-comment-text"></i></label>
                   <input
                     className="form-control"
                     type="text"
-                    placeholder="Description"
+                    placeholder="Product Description"
                     value={formState.description}
                     onChange={e => {
                       setFormState({ ...formState, description: e.target.value });
@@ -86,10 +88,11 @@ export default function Product() {
                   />
                 </div>
                 <div className="form-group">
+                  <label><i className="zmdi zmdi-shopping-cart-plus"></i></label>
                   <input
                     className="form-control"
                     type="number"
-                    placeholder="Available"
+                    placeholder="Stock Available"
                     value={formState.available}
                     onChange={e => {
                       setFormState({ ...formState, available: e.target.value });
@@ -97,18 +100,19 @@ export default function Product() {
                   />
                 </div>
                 <div className="form-group">
+                  <label><i className="zmdi zmdi-label-heart"></i></label>
                   <input
                     className="form-control"
                     type="number"
-                    placeholder="Price"
+                    placeholder="Product Price"
                     value={formState.price}
                     onChange={e => {
                       setFormState({ ...formState, price: e.target.value });
                     }}
                   />
                 </div>
-                <div className="form-group form-button button">
-                  <button type="submit" className="btn-hover color-1">Add</button>
+                <div className="form-group form-button">
+                  <button type="submit" className="btn-hover10 color-10">Add</button>
                 </div>
             </form>
           </div>
