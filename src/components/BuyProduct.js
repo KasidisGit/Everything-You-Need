@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Label } from 'semantic-ui-react'
 import { useLocation,  Redirect } from 'react-router-dom';
-  
+import authService from '../services/authentication.service'
+
 const axios = require('axios');
 
 const initialState = {
-    number: 0
+    number: 0,
+    _csrf: ''
 };
 
 export default function BuyProduct() {
@@ -55,20 +57,30 @@ export default function BuyProduct() {
 
     } , [])
 
-  const buy = () => {
-    const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
+  const getcsrf = async () => {
+    const {csrfToken} = await authService.getCsrf()
+    setFormState({ ...formState, _csrf: csrfToken })
+    console.log(csrfToken)
+  }
+
+  const buy = async () => {
     const json = JSON.stringify(formState);
+    const {csrfToken} = await authService.getCsrf()
+    console.log(csrfToken)
+    setFormState({ ...formState, _csrf: csrfToken })
     axios.post(
       'http://localhost:9000/api/v1/products/buy/'+productId, json, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ accessToken ,
           'Access-Control-Allow-Origin' : '*'
         },
         withCredentials: true
       })
-      .then(
-          setSubmitted(true)
+      .then((response) => {
+        console.log(response.data)
+        alert('Buy successfully')
+        setSubmitted(true)
+      }
         ).catch(err =>{
             console.error(err)
         });
@@ -98,7 +110,7 @@ export default function BuyProduct() {
 			<div className="product-des">{selectedProduct.description}</div>
 			<div className="product-avail">Available: {selectedProduct.available}</div>
 			<div id="amount">
-				<div id="btn-1" className="ui icon button">
+				<div onClick= {()=> getcsrf()} id="btn-1" className="ui icon button">
 					<i className="minus icon"></i>
   				</div>
 				<input

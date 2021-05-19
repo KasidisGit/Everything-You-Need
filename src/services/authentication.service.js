@@ -9,6 +9,7 @@ class AuthService {
       .post(API_URL +"login", {
         username,
         password,
+        "_csrf": csrf
       },
       {
         headers: {
@@ -18,11 +19,11 @@ class AuthService {
         withCredentials: true
       })
       .then(response => {
-        // if (response.data) {
-        //   console.log(response.data)
-        //   console.log(JSON.stringify(response.data))
-        //   localStorage.setItem("user", JSON.stringify(response.data));
-        // }
+        if (response.data) {
+          console.log(response.data)
+          console.log(JSON.stringify(response.data))
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
 
         return response.data;
       });
@@ -34,7 +35,9 @@ class AuthService {
 
   getCsrf() {
     return axios
-      .get(API_URL +"csrf-token")
+      .get(API_URL +"csrf-token", {
+        withCredentials: true
+      })
       .then(response => {
         return response.data;
       });

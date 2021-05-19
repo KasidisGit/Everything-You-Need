@@ -13,17 +13,21 @@ export default function Login() {
   const [submitted, setSubmitted] = useState(false);
   const [csrfToken, setCsrfToken] = useState('');
 
-  // useEffect(async ()=> {
-  //   const csrf = await authService.getCsrf()
-  //   setCsrfToken(csrf)
-  // })
+  // useEffect(()=> {
+  //   return <Redirect push to={{
+  //     pathname: '/listproduct',
+  //   }}
+  //   />
+  // }, [submitted])
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    
     try {
-      // const csrf = await authService.getCsrf()
-      // console.log(csrf)
-      await authService.login(username, password);
+      const {csrfToken} = await authService.getCsrf()
+      console.log(csrfToken)
+      await authService.login(username, password, csrfToken);
+      alert('login successfully')
       setSubmitted(true)
     } catch(error) {
       alert("Username or password is incorrect")
