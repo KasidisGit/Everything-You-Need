@@ -11,6 +11,7 @@ const initialState = {
     price: ""
 };
 
+
 export default function EditProduct() {
 
     const [formState, setFormState] = useState(initialState)
@@ -68,10 +69,9 @@ export default function EditProduct() {
       if(!formState.available){
         formState.available = selectedProduct.available
       }else{
-        let avail = parseFloat(selectedProduct.available) 
+        let avail = parseFloat(selectedProductInit.available) 
         let add_avail = parseFloat(formState.available)
         formState.available = avail + add_avail
-
       }
       if(!formState.price){
         formState.price =  selectedProduct.price
@@ -123,14 +123,14 @@ export default function EditProduct() {
           }}
       />
     }  
-  
+
     return (
     <div id="edit-main">
       <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left back-place"></i></a>
       <h3 className="old-product-name">Product Information</h3>
       <div className="font-normal">Name: {selectedProduct.name}</div>
       <div className="font-normal">Description: {selectedProduct.description}</div>
-      <div className="font-normal">Available: {selectedProduct.available}</div>
+      <div className="font-normal">Available: { (parseInt(selectedProductInit.available) + parseInt(formState.available) || parseInt(selectedProductInit.available)) }</div>
       <div className="font-normal">Price: {selectedProduct.price}</div>
       <div id="button-delete">
         <button onClick={(e) => deleteHandler(e)} className="btn-hover2 color-3" >Delete</button>

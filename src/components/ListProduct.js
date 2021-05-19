@@ -69,9 +69,7 @@ export default function ListProduct() {
     return `https://picsum.photos/id/${randomId}/275/275.jpg`
   }
 
-  const edit = (
-    <Button circular icon='edit' onClick={() => editHandler(productId)}/>
-  )
+
 
   if ( location.state ){
     if( location.state.status === 'ok'){
@@ -188,8 +186,10 @@ export default function ListProduct() {
                       </Card.Content>
                       <Card.Content extra>
                       <div className='two buttons'>
-                        {edit}
+                      
+                        <Button circular icon='edit' onClick={() => editHandler(element.id)} />
                         <Button animated='vertical' color='teal' onClick={() => buyHandler(element.id)}  className='shop-btn'>
+                          
                           <Button.Content hidden>Shop</Button.Content>
                           <Button.Content visible>
                             <Icon name='shop' />
