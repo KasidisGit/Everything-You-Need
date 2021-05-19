@@ -4,19 +4,25 @@ import axios from 'axios';
 const API_URL = "http://localhost:9000/api/v1/users/"
 
 class AuthService {
-  login(username, password) {
+  async login(username, password, csrf) {
     return axios
       .post(API_URL +"login", {
         username,
-        password
+        password,
       },
       {
+        headers: {
+          Accepts: "application/json",
+          "Content-Type": "application/json",
+        },
         withCredentials: true
       })
       .then(response => {
-        if (response.data) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
+        // if (response.data) {
+        //   console.log(response.data)
+        //   console.log(JSON.stringify(response.data))
+        //   localStorage.setItem("user", JSON.stringify(response.data));
+        // }
 
         return response.data;
       });
@@ -24,6 +30,14 @@ class AuthService {
 
   currentUser() {
     return JSON.parse(localStorage.getItem('user'))
+  }
+
+  getCsrf() {
+    return axios
+      .get(API_URL +"csrf-token")
+      .then(response => {
+        return response.data;
+      });
   }
 
   isAdmin() {

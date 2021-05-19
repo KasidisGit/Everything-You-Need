@@ -1,18 +1,28 @@
 import loginImg from '../images/login-img.jpg';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router'
 import authService from '../services/authentication.service'
 
 export default function Login() {
 
+  
+
   // const [formState, setFormState] = useState(initialState);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [csrfToken, setCsrfToken] = useState('');
+
+  // useEffect(async ()=> {
+  //   const csrf = await authService.getCsrf()
+  //   setCsrfToken(csrf)
+  // })
 
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
+      // const csrf = await authService.getCsrf()
+      // console.log(csrf)
       await authService.login(username, password);
       setSubmitted(true)
     } catch(error) {
