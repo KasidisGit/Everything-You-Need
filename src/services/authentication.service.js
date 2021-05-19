@@ -1,4 +1,3 @@
-import { getRoles } from '@testing-library/dom';
 import axios from 'axios';
 
 const API_URL = "http://localhost:9000/api/v1/users/"

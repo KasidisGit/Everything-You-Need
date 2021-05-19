@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router'
 import addProductImg from '../images/add-product.jpg';
 import authService from '../services/authentication.service'
@@ -13,13 +13,11 @@ const initialState = {
     _csrf: ""
 };
 
-
-
 export default function Product() {
 
   const [formState, setFormState] = useState(initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [csrf, setCsrf] = useState('')
+
   const submitHandler = event => {
     event.preventDefault();
     postData();

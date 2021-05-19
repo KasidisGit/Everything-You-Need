@@ -11,7 +11,6 @@ const initialState = {
     price: ""
 };
 
-
 export default function EditProduct() {
 
     const [formState, setFormState] = useState(initialState)

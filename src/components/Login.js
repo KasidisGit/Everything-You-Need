@@ -1,5 +1,5 @@
 import loginImg from '../images/login-img.jpg';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router'
 import authService from '../services/authentication.service'
 
@@ -8,14 +8,6 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [csrfToken, setCsrfToken] = useState('');
-
-  // useEffect(()=> {
-  //   return <Redirect push to={{
-  //     pathname: '/listproduct',
-  //   }}
-  //   />
-  // }, [submitted])
 
   const submitHandler = async (event) => {
     event.preventDefault();
