@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Label } from 'semantic-ui-react'
-import { useLocation,  Redirect } from 'react-router-dom';
+import { useLocation,  Redirect, Link } from 'react-router-dom';
   
 const axios = require('axios');
 
@@ -85,7 +85,7 @@ export default function BuyProduct() {
 	<section id="right">
 		<div>
 		<a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
-		<a href="/editproduct"><i className="edit-icon zmdi zmdi-edit">edit</i></a>
+		<Link to={{ pathname: "/editproduct/"+productId }}><i className="edit-icon zmdi zmdi-edit">edit</i></Link>
 		</div>
 		<form onSubmit={(e) => submitHandler(e)}>
 			<div className="product-name">{selectedProduct.name}</div>
