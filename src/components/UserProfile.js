@@ -19,10 +19,18 @@ export default function UserProfile() {
     const [formState, setFormState] = useState(initialState);
     const [submitted, setSubmitted] = useState(false);
     const [selectedUser, setSelectedUser] = useState({});
+    const [selectedUserInit, setSelectedUserInitial] = useState({})
     const userId = currentUser.id
+
     const submitHandler = (event) => {
       event.preventDefault();
-      update(); 
+      updateUser(); 
+    };
+
+    const cancelHandler = (event) => {
+      event.preventDefault();
+      setSelectedUser(selectedUserInit);
+      setFormState(initialState)
     };
   
     useEffect( () => {
@@ -32,6 +40,7 @@ export default function UserProfile() {
         
       }).then(user => {
         setSelectedUser(user.data)
+        setSelectedUserInitial(user.data)
       })
       .catch(err => {
           console.error(err)
@@ -39,7 +48,7 @@ export default function UserProfile() {
   
       } , [])
   
-    const update = async () => {
+    const updateUser = () => {
       const accessToken =  JSON.parse(localStorage.getItem('user')).accessToken
       formState.username = JSON.parse(localStorage.getItem('user')).username
       if(!formState.email){
@@ -82,47 +91,40 @@ export default function UserProfile() {
       />
     }  
     return (
-        <>
-    <div id="main" className="buy-body">
-    <section id="leftEdit">
-    <h3 className="old-product-name">User Information</h3>
-    <div className="product-name-edit">Username: {selectedUser.username}</div>
-    <div className="product-role-edit">Role: {selectedUser.role}</div>
-    <div className="product-avail-edit">Email: {selectedUser.email}</div>
-    <div className="product-des-edit">Cash: {parseFloat(selectedUser.cash).toFixed(2)} ฿</div>
-    <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left"></i></a>
-    </section>
-          <form onSubmit={(e) => submitHandler(e)}>
-          <section id="right">
-
-              <div id="amount">
-                <input
-                        type="email"
-                        placeholder="new email"
-                        value={formState.email}
-                        onChange={e => {
-                          setFormState({ ...formState, email: e.target.value });
-                        }} 
-                  />
-                <input
-                        type="number"
-                        placeholder="new cash"
-                        value={formState.money}
-                        onChange={e => {
-                          setFormState({ ...formState, money: e.target.value });
-                        }} 
-                  />
-              </div>
-              
-              <div id="inline">
-              <div id="button-edit">
-                  <button className="btn-hover color-1" type="submit">Edit</button>
-              </div>
-              </div>
-              </section>
-          </form>
-
+      <div id="profile-main">
+        <a href="/listproduct"><i className="back-icon zmdi zmdi-long-arrow-left back-place"></i></a>
+        <h3 className="old-product-name">User Information</h3>
+        <div className="font-normal">Username: {selectedUser.username}</div>
+        <div className="font-normal">Role: {selectedUser.role}</div>
+        <div className="font-normal">Email: {selectedUser.email}</div>
+        <div className="font-normal">Cash: {parseFloat(selectedUser.cash).toFixed(2)} ฿</div>
+        <h3 className="old-product-name">Edit Information</h3>
+        <form onSubmit={(e) => submitHandler(e)}>
+          <div className="font-normal">
+            <input
+              type="email"
+              placeholder="New email"
+              value={formState.email}
+              onChange={e => {
+                setFormState({ ...formState, email: e.target.value });
+                setSelectedUser({ ...selectedUser, email: e.target.value });
+              }} 
+            />
+            <input
+              type="number"
+              placeholder="New cash"
+              value={formState.money}
+              onChange={e => {
+                setFormState({ ...formState, money: e.target.value });
+                setSelectedUser({ ...selectedUser, money: e.target.value });
+              }}
+            />
+          </div>
+          <div id="group-button">
+            <button className="btn-hover2 color-4" type="submit">Edit</button>
+            <button className="btn-hover2 color-2" onClick={(e) => cancelHandler(e)}>Clear</button>
+          </div>
+        </form>
       </div>
-    </>
-    )
+  )
 }

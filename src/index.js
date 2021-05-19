@@ -6,7 +6,7 @@ import './css/addProduct.css';
 import './css/buyProduct.css';
 import './css/listProduct.css';
 import './css/editProduct.css';
-
+import './css/userProfile.css';
 
 ReactDOM.render(
   <React.StrictMode>

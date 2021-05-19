@@ -4,7 +4,7 @@
 	color: black;
 }
 
-#edit-main {
+#profile-main {
 	position: relative;
 	width: 400px;
 	height: auto;
@@ -30,7 +30,7 @@
 
 .font-normal {
 	font-size: 14px;
-	margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 .back-place {
@@ -72,6 +72,7 @@
 }
 
 .btn-hover2.color-2 {
+    margin-top: 30px;
 	margin-left: 20px;
 	width: 80px;
     background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
