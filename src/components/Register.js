@@ -19,6 +19,7 @@ export default function Register() {
   const [formState, setFormState] = useState(initialState);
   const [confirmPassword, setConfirmPassword] = useState('')
   const [submitted, setSubmitted] = useState(false);
+  const [roleState,setRoleState] = useState("user")
   const submitHandler = async event => {
     event.preventDefault();
     if (confirmPassword === formState.password) {
@@ -28,7 +29,6 @@ export default function Register() {
         setSubmitted(true)
       } catch(error) {
         alert(error.response.data.error.message)
-        console.log(formState.password)
       }
     } else {
       alert('Confirm password should be match with password')
@@ -48,18 +48,25 @@ export default function Register() {
     },
   ];
 
+
+  const handleChange = (e, { value }) => {
+    setRoleState( value )
+    formState.role = value
+  }
+
   if (submitted) {
     return <Redirect push to={{
       pathname: '/login',
     }}
     />
   } 
+
   return (
     <div className="container">
       <div className="signup-content">
         <div className="signup-form">
             <h2 className="title-head-re">Register</h2>
-            <form onSubmit={(e) => submitHandler(e)} className="register-form">
+            <form onSubmit={submitHandler} className="register-form">
               <div className="form-group">
                 <label for="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                 <input
@@ -118,10 +125,8 @@ export default function Register() {
                   required
                   selection
                   options={roleOptions}
-                  value={formState.role}
-                  onChange={e => {
-                    setFormState({ ...formState, role: e.target.value });
-                  }}
+                  value={roleState}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group form-button">
