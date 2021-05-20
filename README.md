@@ -9,7 +9,7 @@ The application where we can shop for the product. The features that are include
 1. Follow the [secure-project](https://github.com/kornkritpawit/secure-project). You need to install and run that repository first.
 2. Clone or download this repository to your local machine.
 ```
-git clone https://github.com/KasidisGit/frontend_client
+git clone https://github.com/KasidisGit/Everything-You-Need
 ```
 3. Install dependencies
 ```
